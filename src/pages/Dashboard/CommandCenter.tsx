@@ -14,7 +14,6 @@ const CommandCenter = () => {
     departments: undefined,
     status: 'day',
   };
-  console.log('abc');
   
   const [params, setParams] = useState<IParamsDB>(defaultParam);
   const [alignment, setAlignment] = React.useState<string | null>('day');
