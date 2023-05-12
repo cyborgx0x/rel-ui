@@ -4,9 +4,11 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import AuthGuard from '@/components/Auth/AuthGuard';
 import GuestGuard from '@/components/Auth/GuestGuard';
+import { Footer } from '@/components/Footer';
 import { Layout } from '@/components/Layout';
 import Login from '@/pages/authentication/Login';
 import CommandCenter from '@/pages/Dashboard/CommandCenter';
+import SearchName from '@/pages/search/SearchName';
 
 const ListRouter = () => {
   return (
@@ -42,7 +44,11 @@ const ListRouter = () => {
           exact
           render={(props) => (
             <GuestGuard>
-              <Login />
+              <Layout>
+                {/* <Login /> */}
+                <SearchName />
+              </Layout>
+              {/* <CommandCenter /> */}
             </GuestGuard>
           )}
         />
