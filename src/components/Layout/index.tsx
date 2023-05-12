@@ -21,7 +21,7 @@ export const Layout = ({ children }: Props) => {
         <Box component="header">
           <Header toggleNavigation={toggleNavigation} />
         </Box>
-        <Navigation open={open} handleClose={toggleNavigation} />
+        {/* <Navigation open={open} handleClose={toggleNavigation} /> */}
         <Box component="main" sx={{ flexGrow: 1 }}>
           <DrawerHeader />
           <Box sx={{ width: '100%', padding: 2 }}>{children}</Box>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { AppBar, Box, Toolbar } from '@mui/material';
+import { AppBar, Box, Toolbar, Button, ButtonGroup } from '@mui/material';
 
 import Logo from '@/assets/image/etc-logo.png';
 import useAuth from '@/Hooks/useAuth';
@@ -33,6 +33,7 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
   return (
     <>
       <AppBar
+        // onClick={() => handleMenuClose()}
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
@@ -41,14 +42,35 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
         }}
       >
         <Toolbar disableGutters variant="dense">
-          <Hamburger toggleNavigation={toggleNavigation} />
+          {/* <Hamburger toggleNavigation={toggleNavigation} /> */}
           <Box component="img" src={Logo} paddingX={1} sx={{ width: 80, height: 34 }} />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
             {/* <ThemeSwitcher /> */}
-            <Messages total={15} />
-            <Notifications total={20} />
-            <UserAccount onClick={handleProfileMenuOpen} />
+            {/* <Messages total={15} />
+            <Notifications total={20} /> */}
+            {/* <UserAccount onClick={handleProfileMenuOpen} /> */}
+            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
+              About
+            </Button>
+            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
+              Product
+            </Button>
+            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
+              Blog
+            </Button>
+            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
+              Tools
+            </Button>
+            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
+              Integrations
+            </Button>
+            <Button variant="outlined" style={{ marginRight: 10, marginLeft: 10, textTransform: 'none' }}>
+              Log In
+            </Button>
+            <Button variant="contained" style={{ marginRight: 10, textTransform: 'none' }}>
+              Sign In
+            </Button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <More onClick={handleMobileMenuOpen} />
@@ -58,7 +80,7 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
       <MobileMenu
         isMenuOpen={Boolean(mobileMoreAnchorEl)}
         handleMenuOpen={handleMobileMenuOpen}
-        handleMenuClose={logout}
+        handleMenuClose={handleMenuClose}
         anchorEl={mobileMoreAnchorEl}
       />
       <DefaultMenu isMenuOpen={Boolean(anchorEl)} handleMenuClose={logout} anchorEl={anchorEl} />
