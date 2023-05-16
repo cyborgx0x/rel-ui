@@ -1,19 +1,9 @@
 import { useState } from 'react';
 import * as React from 'react';
 
-import {
-  Link,
-  Stack,
-  Checkbox,
-  TextField,
-  IconButton,
-  InputAdornment,
-  FormControlLabel,
-  Grid,
-  Button,
-  Box,
-} from '@mui/material';
+import { Stack, TextField, Button, Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Paper from '@mui/material/Paper';
+import { SelectChangeEvent } from '@mui/material/Select';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -22,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import icNotFound from '@/assets/image/ic_not_found.png';
+import { useSearch } from '@/Hooks/useSearch';
 
 function createData(name: string, calories: string, fat: string, carbs: string, protein: string) {
   return { name, calories, fat, carbs, protein };
@@ -37,14 +28,36 @@ const rows = [
 const SearchName = () => {
   const [valueSearch, setValueSearch] = useState('');
   const [isShow, setShow] = useState(true);
+  const { handleSearchInfo } = useSearch();
   const handleKeyDown = (event: { keyCode: number }) => {
     if (event.keyCode === 13) {
       setShow(!isShow);
     }
   };
+  const [typeSearch, setTypeSearch] = useState('phone:');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setTypeSearch(event.target.value as string);
+  };
   return (
     <>
       <Stack direction="row" style={{ marginTop: 40 }}>
+        <FormControl sx={{ width: 200 }}>
+          <InputLabel id="demo-simple-select-label">Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={typeSearch}
+            label="typeSearch"
+            onChange={handleChange}
+          >
+            <MenuItem value="phone:">phone</MenuItem>
+            <MenuItem value="email:">email</MenuItem>
+            <MenuItem value="facebook_id:">facebook_id</MenuItem>
+            <MenuItem value="pci:">pci</MenuItem>
+            <MenuItem value="username:">username</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           fullWidth
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValueSearch(event.target.value)}
@@ -57,7 +70,7 @@ const SearchName = () => {
           variant="contained"
           style={{ textTransform: 'none' }}
           onClick={() => {
-            setShow(!isShow);
+            handleSearchInfo(`${typeSearch}${valueSearch}`);
           }}
         >
           Search

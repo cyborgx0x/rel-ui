@@ -6,11 +6,12 @@ const useSearch = () => {
   const handleCloseModal = () => {
     setIsOpenModal(false);
   };
-
+  const handleSearchInfo = (text: string) => {};
   return {
     isOpenModal,
     setIsOpenModal,
     handleCloseModal,
+    handleSearchInfo,
   };
 };
 
