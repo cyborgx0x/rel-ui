@@ -1,8 +1,9 @@
-version: "3.4"
+version: '3.4'
 
 services:
   app:
+    image: search_info
     build: .
     ports:
-      - "80:80"
+      - '80:80'
     restart: unless-stopped
