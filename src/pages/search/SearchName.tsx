@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as React from 'react';
 
-import { Stack, TextField, Button, Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Stack, TextField, Button, Box, FormControl, MenuItem, Select, Link } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { SelectChangeEvent } from '@mui/material/Select';
 import Table from '@mui/material/Table';
@@ -10,28 +10,31 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import * as _ from 'lodash';
 
 import icNotFound from '@/assets/image/ic_not_found.png';
-import { useSearch } from '@/Hooks/useSearch';
+import useSearch from '@/Hooks/useSearch';
 
-function createData(name: string, calories: string, fat: string, carbs: string, protein: string) {
-  return { name, calories, fat, carbs, protein };
+export interface DataSearch {
+  Gender: string;
+  PCI: string;
+  FullName: string;
+  Birthday: string;
+  Address: string;
+  Email: string;
+  PhoneNum: string;
+  Facebook: string;
+  Username: string;
 }
-
-const rows = [
-  createData('Nguyễn Văn A', '0123456789', 'nguyenVanA@gmail.com', 'số 1 chợ lớn', ''),
-  // createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  // createData('Eclair', 262, 16.0, 24, 6.0),
-  // createData('Cupcake', 305, 3.7, 67, 4.3),
-  // createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 const SearchName = () => {
   const [valueSearch, setValueSearch] = useState('');
-  const [isShow, setShow] = useState(true);
+  const [isShow, setShow] = useState(false);
+  const [data, setData] = useState<DataSearch[]>([]);
+
   const { handleSearchInfo } = useSearch();
   const handleKeyDown = (event: { keyCode: number }) => {
     if (event.keyCode === 13) {
-      setShow(!isShow);
+      handleSearch();
     }
   };
   const [typeSearch, setTypeSearch] = useState('phone:');
@@ -39,23 +42,28 @@ const SearchName = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setTypeSearch(event.target.value as string);
   };
+  const handleSearch = async () => {
+    const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearch}`)) as DataSearch[];
+    setData(dataRes);
+    setShow(true);
+  };
   return (
     <>
       <Stack direction="row" style={{ marginTop: 40 }}>
-        <FormControl sx={{ width: 200 }}>
-          <InputLabel id="demo-simple-select-label">Type</InputLabel>
+        <FormControl sx={{ minWidth: 140 }}>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={typeSearch}
-            label="typeSearch"
+            displayEmpty
+            inputProps={{ 'aria-label': 'Without label' }}
             onChange={handleChange}
           >
-            <MenuItem value="phone:">phone</MenuItem>
-            <MenuItem value="email:">email</MenuItem>
-            <MenuItem value="facebook_id:">facebook_id</MenuItem>
+            <MenuItem value="phone:">Phone</MenuItem>
+            <MenuItem value="email:">Email</MenuItem>
+            <MenuItem value="facebook_id:">Id Facebook</MenuItem>
             <MenuItem value="pci:">pci</MenuItem>
-            <MenuItem value="username:">username</MenuItem>
+            <MenuItem value="username:">User Name</MenuItem>
           </Select>
         </FormControl>
         <TextField
@@ -63,50 +71,73 @@ const SearchName = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValueSearch(event.target.value)}
           value={valueSearch}
           placeholder="Enter phone, email, address, and more..."
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, marginLeft: 10 }}
           onKeyDown={handleKeyDown}
         />
         <Button
           variant="contained"
           style={{ textTransform: 'none' }}
-          onClick={() => {
-            handleSearchInfo(`${typeSearch}${valueSearch}`);
+          onClick={async () => {
+            handleSearch();
           }}
         >
           Search
         </Button>
       </Stack>
-      {isShow ? (
+
+      {data.length !== 0 && (
         <TableContainer component={Paper} style={{ marginTop: 30 }}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Họ và tên</TableCell>
-                <TableCell align="center">Số điện thoại</TableCell>
+                <TableCell align="center">PII</TableCell>
+                <TableCell align="center">Full Name</TableCell>
+                <TableCell align="center">Gender</TableCell>
+                <TableCell align="center">Birthday</TableCell>
+                <TableCell align="center">Address</TableCell>
                 <TableCell align="center">Email</TableCell>
-                <TableCell align="center">Địa chỉ</TableCell>
+                <TableCell align="center">Phone Number</TableCell>
                 <TableCell align="center">Facebook</TableCell>
+                <TableCell align="center">User Name</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
+              {data.map((row) => (
+                <TableRow key={row.Gender} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                  {/* <TableCell component="th" scope="row">
+                    {row.Gender}
+                  </TableCell> */}
+                  <TableCell align="center">{row.PCI}</TableCell>
+                  <TableCell align="center">{row.FullName}</TableCell>
+                  <TableCell align="center">{row.Gender}</TableCell>
+                  <TableCell align="center">{row.Birthday}</TableCell>
+                  <TableCell align="center">{row.Address}</TableCell>
+                  <TableCell align="center">{row.Email}</TableCell>
+                  <TableCell align="center">{row.PhoneNum}</TableCell>
+                  <TableCell align="center">
+                    <Link
+                      component="button"
+                      variant="body2"
+                      href={row.Facebook}
+                      onClick={() => {
+                        window.open(row.Facebook, '_blank');
+                      }}
+                    >
+                      {row.Facebook}
+                    </Link>
+                    {/* <Link to={row.Facebook}>{row.Facebook} tag</Link> */}
                   </TableCell>
-                  <TableCell align="center">{row.calories}</TableCell>
-                  <TableCell align="center">{row.fat}</TableCell>
-                  <TableCell align="center">{row.carbs}</TableCell>
-                  <TableCell align="center">{row.protein}</TableCell>
+                  <TableCell align="center">{row.Username}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-      ) : (
+      )}
+      {data.length === 0 && isShow && (
         <Stack style={{ marginTop: 100 }} alignItems="center">
           <Box component="img" src={icNotFound} sx={{ width: 100, height: 100 }} />
-          <span style={{ color: 'GrayText', fontSize: 20 }}>Không tìm thấy dữ liệu</span>
+          <span style={{ color: 'GrayText', fontSize: 20 }}>No data found</span>
         </Stack>
       )}
     </>

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import { AppBar, Box, Toolbar, Button, ButtonGroup } from '@mui/material';
+import { AppBar, Box, Toolbar, Button } from '@mui/material';
 
-import Logo from '@/assets/image/etc-logo.png';
+import Logo from '@/assets/image/ic_logo.png';
 import useAuth from '@/Hooks/useAuth';
 
-import { Hamburger } from './Hamburger';
 import { DefaultMenu, MobileMenu } from './Menu';
-import { Messages, More, Notifications, UserAccount } from '../Actions';
+import { More } from '../Actions';
 
 interface HeaderProps {
   toggleNavigation: () => void;
@@ -43,7 +42,7 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
       >
         <Toolbar disableGutters variant="dense">
           {/* <Hamburger toggleNavigation={toggleNavigation} /> */}
-          <Box component="img" src={Logo} paddingX={1} sx={{ width: 80, height: 34 }} />
+          <Box component="img" src={Logo} sx={{ width: 60, height: 48 }} />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
             {/* <ThemeSwitcher /> */}

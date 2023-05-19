@@ -4,11 +4,13 @@ import commonReducer from './reducer';
 
 interface CommonContextInterface {
   isLoading: boolean;
+  showModal: any;
   dispatch: React.Dispatch<any>;
 }
 
 const CommonContext = createContext<CommonContextInterface>({
   isLoading: false,
+  showModal: null,
   dispatch: () => null,
 });
 

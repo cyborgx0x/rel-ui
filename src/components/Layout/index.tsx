@@ -27,9 +27,9 @@ export const Layout = ({ children }: Props) => {
           <Box sx={{ width: '100%', padding: 2 }}>{children}</Box>
         </Box>
       </ContentWrapper>
-      <Box component="footer">
+      {/* <Box component="footer">
         <Footer />
-      </Box>
+      </Box> */}
     </LayoutWrapper>
   );
 };

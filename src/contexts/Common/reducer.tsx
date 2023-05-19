@@ -7,6 +7,11 @@ export default function commonReducer(state: any, action: any) {
         ...state,
         isLoading: action?.isLoading,
       };
+    case actionType.SHOW_MODAL:
+      return {
+        ...state,
+        showModal: action?.showModal,
+      };
     default:
       return state;
   }
