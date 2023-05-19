@@ -2,8 +2,8 @@ import { Box, Card, Stack, Link, Container, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 
+import Logo from '@/assets/image/ic_logo.png';
 import Illustration from '@/assets/image/illustration_login.png';
-import Logo from '@/assets/image/logo.png';
 import LoginForm from '@/components/Auth/LoginForm';
 import MHidden from '@/components/common/MHidden';
 

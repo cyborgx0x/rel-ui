@@ -18,4 +18,5 @@ export const urlApi = {
   },
   search: `${getBaseUrl(META_PREFIX)}/statistics/attitude/time-based`,
   chartCommunityAttitude: `${getBaseUrl(META_PREFIX)}/statistics/keyword/time-based`,
+  searchInfo: `${getBaseUrl(META_PREFIX)}/search`,
 };

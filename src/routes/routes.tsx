@@ -19,11 +19,11 @@ const ListRouter = () => {
           path="/"
           exact
           render={(props) => (
-            <AuthGuard>
+            <GuestGuard>
               <Layout>
-                <CommandCenter />
+                <SearchName />
               </Layout>
-            </AuthGuard>
+            </GuestGuard>
           )}
         />
         <Route
