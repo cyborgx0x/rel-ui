@@ -20,9 +20,9 @@ const useSearch = () => {
     const { data, status } = res || {};
     if (status === 200) {
       if (data.status_code === 400) {
-        return [];
+        return {};
       }
-      return [data];
+      return data;
     }
   };
   return {
