@@ -1,23 +1,17 @@
 import { useState } from 'react';
 import * as React from 'react';
 
-import { Stack, TextField, Button, Box, FormControl, MenuItem, Select, Link } from '@mui/material';
-import Paper from '@mui/material/Paper';
+import { Stack, TextField, Button, Box, FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import * as _ from 'lodash';
 
 import icNotFound from '@/assets/image/ic_not_found.png';
+import ItemRow from '@/components/common/ItemRow';
 import useSearch from '@/Hooks/useSearch';
 
 export interface DataSearch {
   Gender: string;
-  PCI: string;
+  PII: string;
   FullName: string;
   Birthday: string;
   Address: string;
@@ -25,12 +19,14 @@ export interface DataSearch {
   PhoneNum: string;
   Facebook: string;
   Username: string;
+  TypeVehicle: string;
+  Plate: string;
 }
 const SearchName = () => {
   const [valueSearch, setValueSearch] = useState('');
   const [isShow, setShow] = useState(false);
-  const [data, setData] = useState<DataSearch[]>([]);
-
+  const [data, setData] = useState<DataSearch>({} as DataSearch);
+  const { Gender, PII, FullName, Birthday, Address, Email, PhoneNum, Facebook, Username, TypeVehicle, Plate } = data;
   const { handleSearchInfo } = useSearch();
   const handleKeyDown = (event: { keyCode: number }) => {
     if (event.keyCode === 13) {
@@ -43,7 +39,7 @@ const SearchName = () => {
     setTypeSearch(event.target.value as string);
   };
   const handleSearch = async () => {
-    const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearch}`)) as DataSearch[];
+    const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearch}`)) as DataSearch;
     setData(dataRes);
     setShow(true);
   };
@@ -62,7 +58,7 @@ const SearchName = () => {
             <MenuItem value="phone:">Phone</MenuItem>
             <MenuItem value="email:">Email</MenuItem>
             <MenuItem value="facebook_id:">Id Facebook</MenuItem>
-            <MenuItem value="pci:">pci</MenuItem>
+            <MenuItem value="pii:">PII</MenuItem>
             <MenuItem value="username:">User Name</MenuItem>
           </Select>
         </FormControl>
@@ -85,56 +81,23 @@ const SearchName = () => {
         </Button>
       </Stack>
 
-      {data.length !== 0 && (
-        <TableContainer component={Paper} style={{ marginTop: 30 }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">PII</TableCell>
-                <TableCell align="center">Full Name</TableCell>
-                <TableCell align="center">Gender</TableCell>
-                <TableCell align="center">Birthday</TableCell>
-                <TableCell align="center">Address</TableCell>
-                <TableCell align="center">Email</TableCell>
-                <TableCell align="center">Phone Number</TableCell>
-                <TableCell align="center">Facebook</TableCell>
-                <TableCell align="center">User Name</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((row) => (
-                <TableRow key={row.Gender} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  {/* <TableCell component="th" scope="row">
-                    {row.Gender}
-                  </TableCell> */}
-                  <TableCell align="center">{row.PCI}</TableCell>
-                  <TableCell align="center">{row.FullName}</TableCell>
-                  <TableCell align="center">{row.Gender}</TableCell>
-                  <TableCell align="center">{row.Birthday}</TableCell>
-                  <TableCell align="center">{row.Address}</TableCell>
-                  <TableCell align="center">{row.Email}</TableCell>
-                  <TableCell align="center">{row.PhoneNum}</TableCell>
-                  <TableCell align="center">
-                    <Link
-                      component="button"
-                      variant="body2"
-                      href={row.Facebook}
-                      onClick={() => {
-                        window.open(row.Facebook, '_blank');
-                      }}
-                    >
-                      {row.Facebook}
-                    </Link>
-                    {/* <Link to={row.Facebook}>{row.Facebook} tag</Link> */}
-                  </TableCell>
-                  <TableCell align="center">{row.Username}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      {!_.isEmpty(data) && (
+        <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
+          <ItemRow title="PII" content={PII} />
+          <ItemRow title="Full Name" content={FullName} />
+          <ItemRow title="Gender" content={Gender} />
+          <ItemRow title="Birthday" content={Birthday} />
+          <ItemRow title="Address" content={Address} />
+          <ItemRow title="Email" contentLink={Email} isEmail={true} />
+          <ItemRow title="Phone Number" content={PhoneNum} />
+          <ItemRow title="Facebook" contentLink={Facebook} />
+          <ItemRow title="User Name" content={Username} />
+          <ItemRow title="Plate" content={Plate} />
+          <ItemRow title="Type Vehicle" content={TypeVehicle} />
+        </Box>
       )}
-      {data.length === 0 && isShow && (
+
+      {_.isEmpty(data) && isShow && (
         <Stack style={{ marginTop: 100 }} alignItems="center">
           <Box component="img" src={icNotFound} sx={{ width: 100, height: 100 }} />
           <span style={{ color: 'GrayText', fontSize: 20 }}>No data found</span>
