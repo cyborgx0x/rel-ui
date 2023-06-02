@@ -1,6 +1,8 @@
 const actionType = {
   SET_LOADING: 'SET_LOADING',
   SHOW_MODAL: 'SHOW_MODAL',
+  SHOW_MODAL_LOGIN_GMAIL: 'SHOW_MODAL_LOGIN_GMAIL',
+  INFOR_GMAIL: 'INFOR_GMAIL',
 };
 
 export { actionType };

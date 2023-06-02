@@ -45,10 +45,8 @@ const ListRouter = () => {
           render={(props) => (
             <GuestGuard>
               <Layout>
-                {/* <Login /> */}
                 <SearchName />
               </Layout>
-              {/* <CommandCenter /> */}
             </GuestGuard>
           )}
         />

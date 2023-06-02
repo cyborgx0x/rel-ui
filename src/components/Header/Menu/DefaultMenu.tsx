@@ -5,12 +5,13 @@ import { Settings, Preferences, SignOut } from '../../Actions';
 interface DefaultMenuProps {
   isMenuOpen: boolean;
   handleMenuClose: () => void;
+  handleLogout: () => void;
   anchorEl: HTMLElement | null;
 }
 
-export const DefaultMenu = ({ isMenuOpen, handleMenuClose, anchorEl }: DefaultMenuProps) => (
+export const DefaultMenu = ({ isMenuOpen, handleMenuClose, anchorEl, handleLogout }: DefaultMenuProps) => (
   <Menu anchorEl={anchorEl} id="primary-search-account-menu" keepMounted open={isMenuOpen} onClose={handleMenuClose}>
-    <MenuItem onClick={handleMenuClose}>
+    {/* <MenuItem onClick={handleMenuClose}>
       <Settings disableTooltip />
       Settings
     </MenuItem>
@@ -18,8 +19,8 @@ export const DefaultMenu = ({ isMenuOpen, handleMenuClose, anchorEl }: DefaultMe
       <Preferences disableTooltip />
       Preferences
     </MenuItem>
-    <Divider />
-    <MenuItem onClick={handleMenuClose}>
+    <Divider /> */}
+    <MenuItem onClick={handleLogout}>
       <SignOut disableTooltip />
       Sign Out
     </MenuItem>

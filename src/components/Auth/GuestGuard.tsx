@@ -12,9 +12,9 @@ interface IProps {
 const GuestGuard = ({ children }: IProps) => {
   const { isAuthenticated } = useUser();
 
-  if (isAuthenticated) {
-    return <Redirect to={BASE_URL} />;
-  }
+  // if (isAuthenticated) {
+  //   return <Redirect to={BASE_URL} />;
+  // }
 
   return <>{children}</>;
 };

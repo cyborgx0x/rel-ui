@@ -5,17 +5,23 @@ import commonReducer from './reducer';
 interface CommonContextInterface {
   isLoading: boolean;
   showModal: any;
+  showModalLoginGmail: any;
+  inforGmail: any;
   dispatch: React.Dispatch<any>;
 }
 
 const CommonContext = createContext<CommonContextInterface>({
   isLoading: false,
   showModal: null,
+  showModalLoginGmail: null,
+  inforGmail: null,
   dispatch: () => null,
 });
 
 const defaultCommonInfo = {
   showModal: null,
+  showModalLoginGmail: null,
+  inforGmail: null,
   isLoading: false,
 };
 

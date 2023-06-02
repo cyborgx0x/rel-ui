@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 
-import { AppBar, Box, Toolbar, Button } from '@mui/material';
+import { AppBar, Box, Toolbar, Button, Container, Grid, Stack } from '@mui/material';
+import { googleLogout } from '@react-oauth/google';
 
 import Logo from '@/assets/image/ic_logo.png';
+import { useCommonInfo } from '@/contexts/Common';
+import { useUser } from '@/contexts/User';
+import useInforGmail from '@/Hooks/common/useInforGmail';
+import useShowModalLoginGmail from '@/Hooks/common/useShowModalLoginGmail';
 import useAuth from '@/Hooks/useAuth';
 
 import { DefaultMenu, MobileMenu } from './Menu';
@@ -14,6 +19,11 @@ interface HeaderProps {
 
 export const Header = ({ toggleNavigation }: HeaderProps) => {
   const { logout } = useAuth();
+  const { setShowModalLoginGmail } = useShowModalLoginGmail();
+  const { inforGmail } = useCommonInfo();
+  const { isAuthenticated } = useUser();
+  const { setInforGmail } = useInforGmail();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -28,7 +38,12 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
+  const logoutGmail = () => {
+    logout();
+    googleLogout();
+    setAnchorEl(null);
+    setInforGmail({ inforGmail: null });
+  };
   return (
     <>
       <AppBar
@@ -64,12 +79,40 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
             <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
               Integrations
             </Button>
-            <Button variant="outlined" style={{ marginRight: 10, marginLeft: 10, textTransform: 'none' }}>
+            {/* <Button variant="outlined" style={{ marginRight: 10, marginLeft: 10, textTransform: 'none' }}>
               Log In
-            </Button>
-            <Button variant="contained" style={{ marginRight: 10, textTransform: 'none' }}>
-              Sign In
-            </Button>
+            </Button> */}
+
+            {inforGmail ? (
+              <Button onClick={handleProfileMenuOpen}>
+                <Stack direction="row" spacing={1}>
+                  <img src={inforGmail.picture} alt="Example" width={30} height={30} style={{ borderRadius: 30 }} />
+                  <span
+                    style={{
+                      color: 'black',
+                      fontSize: 14,
+                      fontWeight: 'bold',
+                      flex: 1,
+                      textTransform: 'none',
+                      paddingTop: 2,
+                    }}
+                  >
+                    {inforGmail.name}
+                  </span>
+                </Stack>
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                style={{ marginRight: 10, textTransform: 'none' }}
+                onClick={() => {
+                  setShowModalLoginGmail({ isShow: true });
+                  // googleLogout();
+                }}
+              >
+                Sign In
+              </Button>
+            )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <More onClick={handleMobileMenuOpen} />
@@ -82,7 +125,12 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
         handleMenuClose={handleMenuClose}
         anchorEl={mobileMoreAnchorEl}
       />
-      <DefaultMenu isMenuOpen={Boolean(anchorEl)} handleMenuClose={logout} anchorEl={anchorEl} />
+      <DefaultMenu
+        isMenuOpen={Boolean(anchorEl)}
+        handleMenuClose={handleMenuClose}
+        anchorEl={anchorEl}
+        handleLogout={logoutGmail}
+      />
     </>
   );
 };
