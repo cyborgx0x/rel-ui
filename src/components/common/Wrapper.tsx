@@ -7,12 +7,13 @@ import Loading from '@/assets/image/running-nezuko-gif.gif';
 import { useCommonInfo } from '@/contexts/Common';
 
 import ModalCustom from './ModalCustom';
+import ModalLoginGmail from './ModalLoginGmail';
 
 interface IProps {
   children: React.ReactNode;
 }
 const Wrapper = React.memo<IProps>(({ children }) => {
-  const { isLoading, showModal } = useCommonInfo();
+  const { isLoading, showModal, showModalLoginGmail } = useCommonInfo();
   return (
     <div>
       <div>{children}</div>
@@ -21,6 +22,7 @@ const Wrapper = React.memo<IProps>(({ children }) => {
         <img src={Loading} alt="login" style={{ width: 200, height: 100 }} />
       </Backdrop>
       {showModal && <ModalCustom />}
+      {showModalLoginGmail && <ModalLoginGmail />}
     </div>
   );
 });

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { SnackbarProvider } from 'notistack';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -27,16 +28,16 @@ function App() {
   );
 
   return (
-    <ReduxProvider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <CommonProvider>
-          <AuthProvider>
-            <ThemeModeContext.Provider value={themeMode}>
-              <ThemeConfig mode={mode}>
-                <ThemePrimaryColor mode={mode}>
-                  <BaseOptionChartStyle />
-                  <GlobalStyles />
-                  <Wrapper>
+    <GoogleOAuthProvider clientId="895399845840-c0eisal6806qg2hgsejkh3hksno2onjb.apps.googleusercontent.com">
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <CommonProvider>
+            <AuthProvider>
+              <ThemeModeContext.Provider value={themeMode}>
+                <ThemeConfig mode={mode}>
+                  <ThemePrimaryColor mode={mode}>
+                    <BaseOptionChartStyle />
+                    <GlobalStyles />
                     <SnackbarProvider
                       maxSnack={3}
                       anchorOrigin={{
@@ -44,16 +45,18 @@ function App() {
                         horizontal: 'right',
                       }}
                     >
-                      <ListRouter />
+                      <Wrapper>
+                        <ListRouter />
+                      </Wrapper>
                     </SnackbarProvider>
-                  </Wrapper>
-                </ThemePrimaryColor>
-              </ThemeConfig>
-            </ThemeModeContext.Provider>
-          </AuthProvider>
-        </CommonProvider>
-      </PersistGate>
-    </ReduxProvider>
+                  </ThemePrimaryColor>
+                </ThemeConfig>
+              </ThemeModeContext.Provider>
+            </AuthProvider>
+          </CommonProvider>
+        </PersistGate>
+      </ReduxProvider>
+    </GoogleOAuthProvider>
   );
 }
 

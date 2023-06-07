@@ -80,7 +80,6 @@ const SearchName = () => {
           Search
         </Button>
       </Stack>
-
       {!_.isEmpty(data) && (
         <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
           <ItemRow title="PII" content={PII} />

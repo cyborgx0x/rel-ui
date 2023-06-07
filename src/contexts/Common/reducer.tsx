@@ -12,6 +12,16 @@ export default function commonReducer(state: any, action: any) {
         ...state,
         showModal: action?.showModal,
       };
+    case actionType.SHOW_MODAL_LOGIN_GMAIL:
+      return {
+        ...state,
+        showModalLoginGmail: action?.showModalLoginGmail,
+      };
+    case actionType.INFOR_GMAIL:
+      return {
+        ...state,
+        inforGmail: action?.inforGmail,
+      };
     default:
       return state;
   }

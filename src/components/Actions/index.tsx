@@ -10,6 +10,8 @@ import {
   List as PreferencesIcon,
 } from '@mui/icons-material';
 
+import Logo from '@/assets/image/ic_logo.png';
+
 import { ActionItem } from './ActionItem';
 
 interface ActionProps {
