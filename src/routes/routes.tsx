@@ -8,6 +8,7 @@ import { Footer } from '@/components/Footer';
 import { Layout } from '@/components/Layout';
 import Login from '@/pages/authentication/Login';
 import CommandCenter from '@/pages/Dashboard/CommandCenter';
+import PricingService from '@/pages/Pricing/PricingService';
 import SearchName from '@/pages/search/SearchName';
 
 const ListRouter = () => {
@@ -27,29 +28,18 @@ const ListRouter = () => {
           )}
         />
         <Route
-          key="soc"
-          path="/soc"
+          key="pricing"
+          path="/pricing"
           exact
           render={(props) => (
             <AuthGuard>
               <Layout>
-                <CommandCenter />
+                <PricingService />
               </Layout>
             </AuthGuard>
           )}
         />
-        <Route
-          key="login"
-          path="/auth/login"
-          exact
-          render={(props) => (
-            <GuestGuard>
-              <Layout>
-                <SearchName />
-              </Layout>
-            </GuestGuard>
-          )}
-        />
+
         <Route
           key="camera"
           path="/camera"

@@ -3,6 +3,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 const PATH = {
   AUTH: {
     LOGIN: 'login',
+    LOGIN_GOOGLE: 'authentication/verify/',
   },
   SEARCH: 'data/search',
 };

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect } from 'react';
 
-import { AuthService } from '@/services/auth';
 import { getTokenStorage } from '@/utils/function';
 
 import { actionType } from './action';
