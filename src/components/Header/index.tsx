@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import { AppBar, Box, Toolbar, Button, Container, Grid, Stack } from '@mui/material';
+import { AppBar, Box, Toolbar, Button, Stack } from '@mui/material';
 import { googleLogout } from '@react-oauth/google';
+import { useHistory } from 'react-router-dom';
 
 import Logo from '@/assets/image/ic_logo.png';
 import { useCommonInfo } from '@/contexts/Common';
@@ -18,6 +19,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ toggleNavigation }: HeaderProps) => {
+  const navigate = useHistory();
   const { logout } = useAuth();
   const { setShowModalLoginGmail } = useShowModalLoginGmail();
   const { inforGmail } = useCommonInfo();
@@ -57,7 +59,13 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
       >
         <Toolbar disableGutters variant="dense">
           {/* <Hamburger toggleNavigation={toggleNavigation} /> */}
-          <Box component="img" src={Logo} sx={{ width: 60, height: 48 }} />
+          <Button
+            onClick={() => {
+              navigate.replace('');
+            }}
+          >
+            <Box component="img" src={Logo} sx={{ width: 60, height: 48 }} />
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
             {/* <ThemeSwitcher /> */}
@@ -76,8 +84,14 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
             <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
               Tools
             </Button>
-            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
-              Integrations
+            <Button
+              variant="text"
+              style={{ color: 'black', textTransform: 'none' }}
+              onClick={() => {
+                navigate.push('/pricing');
+              }}
+            >
+              Pricing
             </Button>
             {/* <Button variant="outlined" style={{ marginRight: 10, marginLeft: 10, textTransform: 'none' }}>
               Log In

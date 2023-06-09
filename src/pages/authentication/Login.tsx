@@ -4,7 +4,6 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import Logo from '@/assets/image/ic_logo.png';
 import Illustration from '@/assets/image/illustration_login.png';
-import LoginForm from '@/components/Auth/LoginForm';
 import MHidden from '@/components/common/MHidden';
 
 const RootStyle = styled(Box)(({ theme }) => ({
@@ -67,7 +66,7 @@ const Login = () => {
               <Typography sx={{ color: 'text.secondary' }}>Đăng nhập để tiếp tục</Typography>
             </Box>
           </Stack>
-          <LoginForm />
+
           <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
               Don’t have an account?&nbsp;

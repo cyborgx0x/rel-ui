@@ -1,10 +1,8 @@
-import { Modal, Box, Typography, Container } from '@mui/material';
+import { Modal, Box, Typography } from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
 
 import Logo from '@/assets/image/ic_logo.png';
 import { useCommonInfo } from '@/contexts/Common';
-import useInforGmail from '@/Hooks/common/useInforGmail';
 import useShowModalLoginGmail from '@/Hooks/common/useShowModalLoginGmail';
 import useAuth from '@/Hooks/useAuth';
 
@@ -19,23 +17,14 @@ const style = {
   p: 4,
 };
 
-interface InforGmail {
-  email: string;
-  picture: string;
-  nameP: string;
-  email_verified: boolean;
-}
-
 const ModalLoginGmail = () => {
   const { showModalLoginGmail } = useCommonInfo();
   const { setShowModalLoginGmail } = useShowModalLoginGmail();
-  const { setInforGmail } = useInforGmail();
+
   const { loginGmail } = useAuth();
   const handleClose = () => setShowModalLoginGmail({ isShow: false });
-  const handleResGoogle = (credentialResponse: any) => {
-    const informGmail: InforGmail = jwt_decode(credentialResponse.credential);
-    loginGmail(informGmail.email);
-    setInforGmail({ inforGmail: informGmail });
+  const handleResGoogle = async (credentialResponse: any) => {
+    await loginGmail(credentialResponse.credential);
     handleClose();
   };
   return (
@@ -59,7 +48,6 @@ const ModalLoginGmail = () => {
           ]}
         >
           <Box component="img" src={Logo} sx={{ width: 60, height: 48 }} />
-          <image />
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginTop: 2, marginBottom: 2 }}>
             Welcome to Wibu
           </Typography>

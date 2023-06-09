@@ -16,16 +16,16 @@ const useRequest = () => {
     const accessToken = '';
     if (accessToken) {
       return {
-        // 'Content-Type': 'application/json',
-        'Content-Type': '*',
+        'Content-Type': 'application/json',
+        // 'Content-Type': '*',
         Authorization: `Bearer ${accessToken}`,
-        'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': '*',
       };
     }
     return {
-      'Content-Type': '*',
-      // 'Content-Type': 'application/json',
-      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+      // 'Content-Type': '*',
+      'Content-Type': 'application/json',
+      // 'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
     };
   };
 
