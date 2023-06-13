@@ -31,6 +31,7 @@ function App() {
     if (window.performance) {
       if (performance.navigation.type === 1) {
         localStorage.removeItem('serviceToken');
+        localStorage.removeItem('refreshToken');
       }
     }
   }, []);
