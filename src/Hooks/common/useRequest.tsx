@@ -13,7 +13,7 @@ const useRequest = () => {
   const { setShowModal } = useShowModal();
   const { setLoading } = useLoading();
   const getHeaders = async () => {
-    const accessToken = '';
+    const accessToken = localStorage.getItem('serviceToken');
     if (accessToken) {
       return {
         'Content-Type': 'application/json',
@@ -44,12 +44,6 @@ const useRequest = () => {
     }
 
     return reject(err);
-  };
-
-  const handleLogout = async () => {
-    // await updateUserToken('');
-    // await setToken('');
-    // // Navigator.reset(SCREEN.LOGIN, '', '');
   };
 
   const methodGet = async (url: string, params?: any) => {

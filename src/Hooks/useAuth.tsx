@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode';
+import TableBody from 'material-ui/Table/TableBody';
 
 import { httpStatus } from '@/configs/Enums/httpStatus';
 import { useUser } from '@/contexts/User';
@@ -26,12 +27,11 @@ const setSession = async (serviceToken: string | undefined, refreshToken = '') =
 };
 
 const useAuth = () => {
-  // const { authLogin } = AuthService.useLazyLogin();
   const { onNotify } = useNotify();
   const { dispatch } = useUser();
   const { setLoading } = useLoading();
   const { setInforGmail } = useInforGmail();
-  const { loginGoogle } = useAuthService();
+  const { loginGoogle, logoutAccount } = useAuthService();
 
   const loginGmail = async (credential: string) => {
     const body = { credential };
@@ -58,6 +58,11 @@ const useAuth = () => {
   };
 
   const logout = async () => {
+    const refreshToken = localStorage.getItem('refreshToken');
+    const body = { refresh: refreshToken };
+    await logoutAccount(body);
+    localStorage.removeItem('serviceToken');
+    localStorage.removeItem('refreshToken');
     await setSession(undefined);
     setInforGmail({ inforGmail: null });
     dispatch({ type: 'LOGOUT' });

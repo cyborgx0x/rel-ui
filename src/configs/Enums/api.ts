@@ -4,6 +4,7 @@ const PATH = {
   AUTH: {
     LOGIN: 'login',
     LOGIN_GOOGLE: 'authentication/verify/',
+    LOGOUT_GOOGLE: 'authentication/logout/',
   },
   SEARCH: 'data/search',
 };

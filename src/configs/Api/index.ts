@@ -16,6 +16,7 @@ export const urlApi = {
   auth: {
     login: `${getBaseUrl(META_PREFIX)}/${PATH.AUTH.LOGIN}`,
     loginGoogle: `${getBaseUrl(META_PREFIX)}/${PATH.AUTH.LOGIN_GOOGLE}`,
+    logoutAccount: `${getBaseUrl(META_PREFIX)}/${PATH.AUTH.LOGOUT_GOOGLE}`,
   },
   search: `${getBaseUrl(META_PREFIX)}/statistics/attitude/time-based`,
   chartCommunityAttitude: `${getBaseUrl(META_PREFIX)}/statistics/keyword/time-based`,
