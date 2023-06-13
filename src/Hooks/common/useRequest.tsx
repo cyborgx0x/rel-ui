@@ -40,7 +40,7 @@ const useRequest = () => {
     } else if (err?.message?.includes('500') || err?.message?.includes('502') || err?.message?.includes('503')) {
       setShowModal({ isShow: true, content: 'Server error' });
     } else {
-      setShowModal({ isShow: true });
+      setShowModal({ isShow: true, content: err?.message });
     }
 
     return reject(err);
