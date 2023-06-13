@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { SnackbarProvider } from 'notistack';
@@ -26,6 +26,14 @@ function App() {
     }),
     [],
   );
+
+  useEffect(() => {
+    if (window.performance) {
+      if (performance.navigation.type === 1) {
+        localStorage.removeItem('serviceToken');
+      }
+    }
+  }, []);
 
   return (
     <GoogleOAuthProvider clientId="895399845840-c0eisal6806qg2hgsejkh3hksno2onjb.apps.googleusercontent.com">
