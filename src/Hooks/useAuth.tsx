@@ -1,5 +1,5 @@
+import { googleLogout } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
-import TableBody from 'material-ui/Table/TableBody';
 
 import { httpStatus } from '@/configs/Enums/httpStatus';
 import { useUser } from '@/contexts/User';
@@ -61,6 +61,7 @@ const useAuth = () => {
     const refreshToken = localStorage.getItem('refreshToken');
     const body = { refresh: refreshToken };
     await logoutAccount(body);
+    googleLogout();
     localStorage.removeItem('serviceToken');
     localStorage.removeItem('refreshToken');
     await setSession(undefined);
