@@ -121,7 +121,6 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
                 style={{ marginRight: 10, textTransform: 'none' }}
                 onClick={() => {
                   setShowModalLoginGmail({ isShow: true });
-                  // googleLogout();
                 }}
               >
                 Sign In
