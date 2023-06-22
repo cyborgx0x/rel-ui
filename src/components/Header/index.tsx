@@ -62,6 +62,7 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
           <Button
             onClick={() => {
               navigate.replace('');
+              window.location.reload();
             }}
           >
             <Box component="img" src={Logo} sx={{ width: 60, height: 48 }} />

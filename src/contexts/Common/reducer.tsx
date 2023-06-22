@@ -22,6 +22,10 @@ export default function commonReducer(state: any, action: any) {
         ...state,
         inforGmail: action?.inforGmail,
       };
+    case actionType.RESTORE_STATE:
+      return {
+        ...action.payload,
+      };
     default:
       return state;
   }
