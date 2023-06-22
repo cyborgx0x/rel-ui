@@ -1,6 +1,8 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 const PricingService = () => {
+  const navigate = useHistory();
   return (
     <>
       <Stack>
@@ -40,19 +42,26 @@ const PricingService = () => {
             </Typography>
             <Box>
               <Typography fontSize={14} fontWeight="600">
-                Access to Daily Update Data
+                Access to Daily Update Data. But limited
               </Typography>
               <Typography fontSize={14} fontWeight="600">
                 Full Port Coverage
               </Typography>
               <Typography fontSize={14} fontWeight="600">
-                Up to 10,000 API Results per 30 Days
+                Free 5 request When Created Account
               </Typography>
               <Typography fontSize={14} fontWeight="600">
                 Access to Special Query
               </Typography>
             </Box>
-            <Button variant="contained" style={{ textTransform: 'none' }} sx={{ marginTop: 10 }}>
+            <Button
+              variant="contained"
+              style={{ textTransform: 'none' }}
+              sx={{ marginTop: 10 }}
+              onClick={() => {
+                navigate.replace('');
+              }}
+            >
               Start Your Search
             </Button>
           </Box>
@@ -70,17 +79,28 @@ const PricingService = () => {
             }}
           >
             <Typography fontSize={14} fontWeight="600" color="#0000FF" variant="h6">
-              Starter
+              Gold
             </Typography>
-            <Typography
-              variant="h3"
-              fontSize={20}
-              fontWeight="1000"
-              style={{ marginTop: 10, marginBottom: 10 }}
-              color="#0000FF"
-            >
-              Free
-            </Typography>
+            <Box sx={{ flexDirection: 'row', display: 'flex' }}>
+              <Typography
+                variant="h3"
+                fontSize={20}
+                fontWeight="1000"
+                style={{ marginTop: 10, marginBottom: 10 }}
+                color="#0000FF"
+              >
+                $9.9/
+              </Typography>
+              <Typography
+                variant="h6"
+                fontSize={5}
+                fontWeight="1000"
+                style={{ marginTop: 20, marginBottom: 10 }}
+                color="brown"
+              >
+                100 Requests
+              </Typography>
+            </Box>
             <Box>
               <Typography fontSize={14} fontWeight="600">
                 Access to Daily Update Data
@@ -89,14 +109,14 @@ const PricingService = () => {
                 Full Port Coverage
               </Typography>
               <Typography fontSize={14} fontWeight="600">
-                Up to 10,000 API Results per 30 Days
+                Free 100 Requests
               </Typography>
               <Typography fontSize={14} fontWeight="600">
                 Access to Special Query
               </Typography>
             </Box>
             <Button variant="contained" style={{ textTransform: 'none' }} sx={{ marginTop: 10 }}>
-              Start Your Search
+              Get it now
             </Button>
           </Box>
           <Box
@@ -113,17 +133,28 @@ const PricingService = () => {
             }}
           >
             <Typography fontSize={14} fontWeight="600" color="#0000FF" variant="h6">
-              Starter
+              Diamond
             </Typography>
-            <Typography
-              variant="h3"
-              fontSize={20}
-              fontWeight="1000"
-              style={{ marginTop: 10, marginBottom: 10 }}
-              color="#0000FF"
-            >
-              Free
-            </Typography>
+            <Box sx={{ flexDirection: 'row', display: 'flex' }}>
+              <Typography
+                variant="h3"
+                fontSize={20}
+                fontWeight="1000"
+                style={{ marginTop: 10, marginBottom: 10 }}
+                color="#0000FF"
+              >
+                $19.9/
+              </Typography>
+              <Typography
+                variant="h6"
+                fontSize={5}
+                fontWeight="1000"
+                style={{ marginTop: 20, marginBottom: 10 }}
+                color="brown"
+              >
+                300 Requests
+              </Typography>
+            </Box>
             <Box>
               <Typography fontSize={14} fontWeight="600">
                 Access to Daily Update Data
@@ -132,14 +163,14 @@ const PricingService = () => {
                 Full Port Coverage
               </Typography>
               <Typography fontSize={14} fontWeight="600">
-                Up to 10,000 API Results per 30 Days
+                Free 300 Requests
               </Typography>
               <Typography fontSize={14} fontWeight="600">
                 Access to Special Query
               </Typography>
             </Box>
             <Button variant="contained" style={{ textTransform: 'none' }} sx={{ marginTop: 10 }}>
-              Start Your Search
+              Get it now
             </Button>
           </Box>
         </Stack>

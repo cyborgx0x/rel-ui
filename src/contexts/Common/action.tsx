@@ -3,6 +3,7 @@ const actionType = {
   SHOW_MODAL: 'SHOW_MODAL',
   SHOW_MODAL_LOGIN_GMAIL: 'SHOW_MODAL_LOGIN_GMAIL',
   INFOR_GMAIL: 'INFOR_GMAIL',
+  RESTORE_STATE: 'RESTORE_STATE',
 };
 
 export { actionType };

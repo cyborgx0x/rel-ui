@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 import commonReducer from './reducer';
 
@@ -39,7 +39,16 @@ export const CommonProvider = ({ children }: Props) => {
     }),
     [commonInfo],
   );
-
+  useEffect(() => {
+    const savedData = localStorage.getItem('myAppData');
+    if (savedData) {
+      dispatch({ type: 'RESTORE_STATE', payload: JSON.parse(savedData) });
+      localStorage.removeItem('myAppData');
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('myAppData', JSON.stringify(commonInfo));
+  }, [commonInfo]);
   return <CommonContext.Provider value={value}>{children}</CommonContext.Provider>;
 };
 

@@ -53,40 +53,60 @@ const SearchName = () => {
   };
   return (
     <>
-      <Stack direction="row" style={{ marginTop: 40 }}>
-        <FormControl sx={{ minWidth: 140 }}>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={typeSearch}
-            displayEmpty
-            inputProps={{ 'aria-label': 'Without label' }}
-            onChange={handleChange}
+      <Stack
+        direction="column"
+        style={{ marginTop: !isShow ? 120 : 40, marginLeft: !isShow ? 100 : 0, marginRight: !isShow ? 100 : 0 }}
+      >
+        {!isShow && (
+          <Typography
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              fontWeight: 'bolder',
+              color: 'Highlight',
+              fontSize: 80,
+            }}
           >
-            <MenuItem value="phone:">Phone</MenuItem>
-            <MenuItem value="email:">Email</MenuItem>
-            <MenuItem value="facebook_id:">Id Facebook</MenuItem>
-            <MenuItem value="pii:">PII</MenuItem>
-            <MenuItem value="username:">User Name</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          fullWidth
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValueSearch(event.target.value)}
-          value={valueSearch}
-          placeholder="Enter phone, email, address, and more..."
-          style={{ marginRight: 10, marginLeft: 10 }}
-          onKeyDown={handleKeyDown}
-        />
-        <Button
-          variant="contained"
-          style={{ textTransform: 'none' }}
-          onClick={async () => {
-            handleSearch();
-          }}
-        >
-          Search
-        </Button>
+            WIBU
+          </Typography>
+        )}
+
+        <Stack direction="row">
+          <FormControl sx={{ minWidth: 140 }}>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={typeSearch}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
+              onChange={handleChange}
+            >
+              <MenuItem value="phone:">Phone</MenuItem>
+              <MenuItem value="email:">Email</MenuItem>
+              <MenuItem value="facebook_id:">Id Facebook</MenuItem>
+              <MenuItem value="pii:">PII</MenuItem>
+              <MenuItem value="username:">User Name</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            fullWidth
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValueSearch(event.target.value)}
+            value={valueSearch}
+            placeholder="Enter phone, email, address, and more..."
+            style={{ marginRight: 10, marginLeft: 10 }}
+            onKeyDown={handleKeyDown}
+          />
+          <Button
+            variant="contained"
+            style={{ textTransform: 'none' }}
+            onClick={async () => {
+              handleSearch();
+            }}
+          >
+            Search
+          </Button>
+        </Stack>
       </Stack>
       {!_.isEmpty(data) && (
         <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
