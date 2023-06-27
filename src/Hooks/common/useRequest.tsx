@@ -1,6 +1,10 @@
+import { googleLogout } from '@react-oauth/google';
 import axios from 'axios';
 import * as _ from 'lodash';
 
+import { useUser } from '@/contexts/User';
+
+import useInforGmail from './useInforGmail';
 import useLoading from './useLoading';
 import useShowModal from './useShowModal';
 
@@ -12,6 +16,8 @@ const useRequest = () => {
   // const { updateUserToken } = useUser();
   const { setShowModal } = useShowModal();
   const { setLoading } = useLoading();
+  const { setInforGmail } = useInforGmail();
+  const { dispatch } = useUser();
   const getHeaders = async () => {
     const accessToken = localStorage.getItem('serviceToken');
     if (accessToken) {
@@ -33,6 +39,7 @@ const useRequest = () => {
     setLoading(false);
     if (err?.message?.includes?.('401')) {
       setShowModal({ isShow: true, content: 'End of login session' });
+      logout();
     } else if (err?.message === 'Network Error') {
       setShowModal({ isShow: true, content: err?.message });
     } else if (err?.message?.includes('timeout')) {
@@ -44,6 +51,14 @@ const useRequest = () => {
     }
 
     return reject(err);
+  };
+
+  const logout = async () => {
+    googleLogout();
+    localStorage.removeItem('serviceToken');
+    localStorage.removeItem('refreshToken');
+    setInforGmail({ inforGmail: null });
+    dispatch({ type: 'LOGOUT' });
   };
 
   const methodGet = async (url: string, params?: any) => {
