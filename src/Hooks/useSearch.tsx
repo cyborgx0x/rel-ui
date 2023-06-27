@@ -5,7 +5,7 @@ import useSearchService from '@/services/search';
 import useLoading from './common/useLoading';
 
 const useSearch = () => {
-  const { getSearchInfo } = useSearchService();
+  const { getSearchInfo, getRemainTokenService } = useSearchService();
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const { setLoading } = useLoading();
 
@@ -20,9 +20,16 @@ const useSearch = () => {
     const { data, status } = res || {};
     if (status === 200) {
       if (data.status_code === 400) {
-        return {};
+        return { remaining: data.remaining };
       }
       return data;
+    }
+  };
+  const getRemainToken = async () => {
+    const res: any = await getRemainTokenService();
+    const { data, status } = res || {};
+    if (status === 200) {
+      return data.tokens;
     }
   };
   return {
@@ -30,6 +37,7 @@ const useSearch = () => {
     setIsOpenModal,
     handleCloseModal,
     handleSearchInfo,
+    getRemainToken,
   };
 };
 

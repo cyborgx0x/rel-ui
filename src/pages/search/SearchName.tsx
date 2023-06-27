@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as React from 'react';
 
-import { Stack, TextField, Button, Box, FormControl, MenuItem, Select, Container, Typography } from '@mui/material';
+import { Stack, TextField, Button, Box, FormControl, MenuItem, Select, Typography } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import * as _ from 'lodash';
 
@@ -22,15 +22,28 @@ export interface DataSearch {
   Username: string;
   TypeVehicle: string;
   Plate: string;
+  remaining: number;
 }
 const SearchName = () => {
-  const accessToken = localStorage.getItem('serviceToken');
-  const { setShowModalLoginGmail } = useShowModalLoginGmail();
-  const [valueSearch, setValueSearch] = useState('');
-  const [isShow, setShow] = useState(false);
+  const handleRemainToken = async () => {
+    const remainToken = await getRemainToken();
+    setRemainToken(remainToken);
+  };
+  const accessToken = localStorage.getItem('serviceToken') || '';
+  useEffect(() => {
+    accessToken && handleRemainToken();
+  }, [accessToken]);
+
   const [data, setData] = useState<DataSearch>({} as DataSearch);
   const { Gender, PII, FullName, Birthday, Address, Email, PhoneNum, Facebook, Username, TypeVehicle, Plate } = data;
-  const { handleSearchInfo } = useSearch();
+  const [remainToken, setRemainToken] = useState(0);
+
+  const { setShowModalLoginGmail } = useShowModalLoginGmail();
+
+  const [valueSearch, setValueSearch] = useState('');
+  const [isShow, setShow] = useState(false);
+
+  const { handleSearchInfo, getRemainToken } = useSearch();
   const handleKeyDown = (event: { keyCode: number }) => {
     if (event.keyCode === 13) {
       handleSearch();
@@ -48,7 +61,9 @@ const SearchName = () => {
       valueSearchConvert = `84${partAfterValue}`;
     }
     const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearchConvert}`)) as DataSearch;
+
     setData(dataRes);
+    setRemainToken(dataRes.remaining);
     setShow(true);
   };
   return (
@@ -107,22 +122,38 @@ const SearchName = () => {
             Search
           </Button>
         </Stack>
+        {accessToken && (
+          <Typography
+            fontSize={{ xs: 20, sm: 14, md: 14, lg: 16 }}
+            sx={{ color: 'black', fontWeight: '600', marginTop: 1, marginLeft: 20 }}
+          >
+            {`Number request remain: ${remainToken}`}
+          </Typography>
+        )}
       </Stack>
       {!_.isEmpty(data) && (
         <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
-          <ItemRow title="PII" content={PII} />
-          <ItemRow title="Full Name" content={FullName} />
+          <ItemRow title="PII" content={PII || 'Không tìm thấy dữ liệu'} />
+          <ItemRow title="Full Name" content={FullName || 'Không tìm thấy dữ liệu'} />
           {accessToken ? (
             <>
-              <ItemRow title="Gender" content={Gender} />
-              <ItemRow title="Birthday" content={Birthday} />
-              <ItemRow title="Address" content={Address} />
-              <ItemRow title="Email" contentLink={Email} isEmail={true} />
-              <ItemRow title="Phone Number" content={PhoneNum} />
-              <ItemRow title="Facebook" contentLink={Facebook} />
-              <ItemRow title="User Name" content={Username} />
-              <ItemRow title="Plate" content={Plate} />
-              <ItemRow title="Type Vehicle" content={TypeVehicle} />
+              <ItemRow title="Gender" content={Gender || 'Không tìm thấy dữ liệu'} />
+              <ItemRow title="Birthday" content={Birthday || 'Không tìm thấy dữ liệu'} />
+              <ItemRow title="Address" content={Address || 'Không tìm thấy dữ liệu'} />
+              {Email ? (
+                <ItemRow title="Email" contentLink={Email} isEmail={true} />
+              ) : (
+                <ItemRow title="Email" content="Không tìm thấy dữ liệu" />
+              )}
+              <ItemRow title="Phone Number" content={PhoneNum || 'Không tìm thấy dữ liệu'} />
+              {Facebook ? (
+                <ItemRow title="Facebook" contentLink={Facebook} />
+              ) : (
+                <ItemRow title="Facebook" content="Không tìm thấy dữ liệu" />
+              )}
+              <ItemRow title="User Name" content={Username || 'Không tìm thấy dữ liệu'} />
+              <ItemRow title="Plate" content={Plate || 'Không tìm thấy dữ liệu'} />
+              <ItemRow title="Type Vehicle" content={TypeVehicle || 'Không tìm thấy dữ liệu'} />
             </>
           ) : (
             <Box
