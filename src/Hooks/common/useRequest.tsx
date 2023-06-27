@@ -42,6 +42,8 @@ const useRequest = () => {
       logout();
     } else if (err?.message === 'Network Error') {
       setShowModal({ isShow: true, content: err?.message });
+    } else if (err?.message?.includes?.('403')) {
+      setShowModal({ isShow: true, content: 'You do not have access' });
     } else if (err?.message?.includes('timeout')) {
       setShowModal({ isShow: true, content: err?.message });
     } else if (err?.message?.includes('500') || err?.message?.includes('502') || err?.message?.includes('503')) {

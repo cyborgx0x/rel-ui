@@ -14,8 +14,20 @@ const useSearchService = () => {
         });
     });
   };
+  const getRemainTokenService = () => {
+    return new Promise((resolve, reject) => {
+      methodGet(urlApi.remainingTokens)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
   return {
     getSearchInfo,
+    getRemainTokenService,
   };
 };
 
