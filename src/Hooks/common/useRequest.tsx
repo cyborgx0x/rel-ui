@@ -8,7 +8,7 @@ import useInforGmail from './useInforGmail';
 import useLoading from './useLoading';
 import useShowModal from './useShowModal';
 
-const TIME_OUT = 15000;
+const TIME_OUT = 150000;
 
 const useRequest = () => {
   const axiosMethod = axios;
