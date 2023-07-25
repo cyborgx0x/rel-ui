@@ -12,17 +12,17 @@ import useShowModalLoginGmail from '@/Hooks/common/useShowModalLoginGmail';
 import useSearch from '@/Hooks/useSearch';
 
 export interface DataSearch {
-  Gender: string;
-  PII: string;
-  FullName: string;
-  Birthday: string;
-  Address: string;
-  Email: string;
-  PhoneNum: string;
-  Facebook: string;
-  Username: string;
-  TypeVehicle: string;
-  Plate: string;
+  Gender: string[];
+  PII: string[];
+  FullName: string[];
+  Birthday: string[];
+  Address: string[];
+  Email: string[];
+  PhoneNum: string[];
+  Facebook: string[];
+  Username: string[];
+  TypeVehicle: string[];
+  Plate: string[];
   remaining: number;
 }
 const SearchName = () => {

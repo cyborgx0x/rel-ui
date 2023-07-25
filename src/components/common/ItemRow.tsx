@@ -2,13 +2,13 @@ import { Link, Stack } from '@mui/material';
 
 interface Props {
   title: string;
-  content?: any;
-  contentLink?: any;
+  content?: string[] | number[];
+  contentLink?: string[] | number[];
   isEmail?: boolean;
 }
 const ItemRow = (props: Props) => {
   const { title, content, contentLink, isEmail } = props;
-  const handleClick = (item: string) => {
+  const handleClick = (item: string | number) => {
     if (isEmail) {
       window.open(`mailto:${item}`, '_blank');
     } else {
@@ -19,7 +19,7 @@ const ItemRow = (props: Props) => {
     if (content) {
       return (
         <div style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>
-          {content.map((item, index) => (
+          {content.map((item: string | number, index: number) => (
             <p key={index} style={{ whiteSpace: 'pre-line' }}>
               {item}
             </p>
@@ -33,7 +33,7 @@ const ItemRow = (props: Props) => {
     if (contentLink) {
       return (
         <div style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>
-          {contentLink.map((item, index) => (
+          {contentLink.map((item: string | number, index: number) => (
             <div key={index}>
               <Link
                 variant="body2"
