@@ -8,6 +8,7 @@ import useAuthService from '@/services/auth';
 import useInforGmail from './common/useInforGmail';
 import useLoading from './common/useLoading';
 import useNotify from './common/useNotify';
+import useShowModalLoginGmail from './common/useShowModalLoginGmail';
 
 interface InforGmail {
   email: string;
@@ -31,7 +32,9 @@ const useAuth = () => {
   const { dispatch } = useUser();
   const { setLoading } = useLoading();
   const { setInforGmail } = useInforGmail();
-  const { loginGoogle, logoutAccount } = useAuthService();
+  const { loginGoogle, logoutAccount, loginLocal } = useAuthService();
+  const { setShowModalLoginGmail } = useShowModalLoginGmail();
+  const handleClose = () => setShowModalLoginGmail({ isShow: false });
 
   const loginGmail = async (credential: string) => {
     const body = { credential };
@@ -68,8 +71,31 @@ const useAuth = () => {
     setInforGmail({ inforGmail: null });
     dispatch({ type: 'LOGOUT' });
   };
+  const handleUserLocal = async (accountLocal: any) => {
+    setLoading(true);
+    const res: any = await loginLocal(accountLocal);
+    setLoading(false);
+    const { data, status } = res || {};
 
-  return { loginGmail, logout };
+    const { access, refresh } = data || {};
+    switch (status) {
+      case httpStatus.StatusOK:
+        await setSession(access, refresh);
+        setInforGmail({ inforGmail: { picture: '', name: accountLocal.username } });
+        dispatch({
+          type: 'LOGIN',
+          payload: {
+            isAuthenticated: true,
+          },
+        });
+        handleClose();
+        onNotify('success', 'Đăng nhập thành công');
+        break;
+      default:
+        break;
+    }
+  };
+  return { loginGmail, logout, handleUserLocal };
 };
 
 export default useAuth;

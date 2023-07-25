@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Stack, TextField, Button, Box, FormControl, MenuItem, Select, Typography } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import * as _ from 'lodash';
+import { useMediaQuery } from 'react-responsive';
 
 import icNotFound from '@/assets/image/ic_not_found.png';
 import ItemRow from '@/components/common/ItemRow';
@@ -25,6 +26,7 @@ export interface DataSearch {
   remaining: number;
 }
 const SearchName = () => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const handleRemainToken = async () => {
     const remainToken = await getRemainToken();
     setRemainToken(remainToken);
@@ -35,8 +37,9 @@ const SearchName = () => {
   }, [accessToken]);
 
   const [data, setData] = useState<DataSearch>({} as DataSearch);
+
   const { Gender, PII, FullName, Birthday, Address, Email, PhoneNum, Facebook, Username, TypeVehicle, Plate } = data;
-  const [remainToken, setRemainToken] = useState(0);
+  const [remainToken, setRemainToken] = useState<number | string>(0);
 
   const { setShowModalLoginGmail } = useShowModalLoginGmail();
 
@@ -66,11 +69,24 @@ const SearchName = () => {
     setRemainToken(dataRes.remaining);
     setShow(true);
   };
+
   return (
     <>
       <Stack
         direction="column"
-        style={{ marginTop: !isShow ? 120 : 40, marginLeft: !isShow ? 100 : 0, marginRight: !isShow ? 100 : 0 }}
+        style={
+          isMobile
+            ? {
+                marginTop: !isShow ? 40 : 40,
+                marginLeft: !isShow ? 10 : 0,
+                marginRight: !isShow ? 10 : 0,
+              }
+            : {
+                marginTop: !isShow ? 120 : 40,
+                marginLeft: !isShow ? 100 : 0,
+                marginRight: !isShow ? 100 : 0,
+              }
+        }
       >
         {!isShow && (
           <Typography
@@ -80,7 +96,7 @@ const SearchName = () => {
               alignItems: 'center',
               fontWeight: 'bolder',
               color: 'Highlight',
-              fontSize: 80,
+              fontSize: isMobile ? 40 : 80,
             }}
           >
             WIBU
@@ -88,7 +104,14 @@ const SearchName = () => {
         )}
 
         <Stack direction="row">
-          <FormControl sx={{ minWidth: 140 }}>
+          <FormControl
+            sx={{
+              minWidth: 140,
+              '@media (max-width: 767px)': {
+                minWidth: 120,
+              },
+            }}
+          >
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -105,6 +128,11 @@ const SearchName = () => {
             </Select>
           </FormControl>
           <TextField
+            sx={{
+              '@media (max-width: 767px)': {
+                minWidth: 150,
+              },
+            }}
             fullWidth
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setValueSearch(event.target.value)}
             value={valueSearch}
@@ -124,8 +152,8 @@ const SearchName = () => {
         </Stack>
         {accessToken && (
           <Typography
-            fontSize={{ xs: 20, sm: 14, md: 14, lg: 16 }}
-            sx={{ color: 'black', fontWeight: '600', marginTop: 1, marginLeft: 20 }}
+            fontSize={{ xs: isMobile ? 16 : 20, sm: 14, md: 14, lg: 16 }}
+            sx={{ color: 'black', fontWeight: '600', marginTop: 1, marginLeft: isMobile ? 16 : 20 }}
           >
             {`Number request remain: ${remainToken}`}
           </Typography>
@@ -133,27 +161,19 @@ const SearchName = () => {
       </Stack>
       {!_.isEmpty(data) && (
         <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
-          <ItemRow title="PII" content={PII || 'Không tìm thấy dữ liệu'} />
-          <ItemRow title="Full Name" content={FullName || 'Không tìm thấy dữ liệu'} />
+          <ItemRow title="PII" content={PII || ['Không tìm thấy dữ liệu']} />
+          <ItemRow title="Full Name" content={FullName || ['Không tìm thấy dữ liệu']} />
           {accessToken ? (
             <>
-              <ItemRow title="Gender" content={Gender || 'Không tìm thấy dữ liệu'} />
-              <ItemRow title="Birthday" content={Birthday || 'Không tìm thấy dữ liệu'} />
-              <ItemRow title="Address" content={Address || 'Không tìm thấy dữ liệu'} />
-              {Email ? (
-                <ItemRow title="Email" contentLink={Email} isEmail={true} />
-              ) : (
-                <ItemRow title="Email" content="Không tìm thấy dữ liệu" />
-              )}
-              <ItemRow title="Phone Number" content={PhoneNum || 'Không tìm thấy dữ liệu'} />
-              {Facebook ? (
-                <ItemRow title="Facebook" contentLink={Facebook} />
-              ) : (
-                <ItemRow title="Facebook" content="Không tìm thấy dữ liệu" />
-              )}
-              <ItemRow title="User Name" content={Username || 'Không tìm thấy dữ liệu'} />
-              <ItemRow title="Plate" content={Plate || 'Không tìm thấy dữ liệu'} />
-              <ItemRow title="Type Vehicle" content={TypeVehicle || 'Không tìm thấy dữ liệu'} />
+              <ItemRow title="Gender" content={Gender || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="Birthday" content={Birthday || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="Address" content={Address || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="Email" contentLink={Email || ['Không tìm thấy dữ liệu']} isEmail={true} />
+              <ItemRow title="Phone Number" content={PhoneNum || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="Facebook" contentLink={Facebook || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="User Name" content={Username || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="Plate" content={Plate || ['Không tìm thấy dữ liệu']} />
+              <ItemRow title="Type Vehicle" content={TypeVehicle || ['Không tìm thấy dữ liệu']} />
             </>
           ) : (
             <Box

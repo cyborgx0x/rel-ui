@@ -43,8 +43,13 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
   const logoutGmail = () => {
     logout();
     googleLogout();
-    setAnchorEl(null);
+    handleMenuClose();
     setInforGmail({ inforGmail: null });
+  };
+
+  const loginLocal = () => {
+    handleMenuClose();
+    setShowModalLoginGmail({ isShow: true });
   };
   return (
     <>
@@ -101,7 +106,7 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
             {inforGmail ? (
               <Button onClick={handleProfileMenuOpen}>
                 <Stack direction="row" spacing={1}>
-                  <img src={inforGmail.picture} alt="Example" width={30} height={30} style={{ borderRadius: 30 }} />
+                  <img src={inforGmail.picture ? inforGmail.picture : Logo} alt="Example" width={30} height={30} style={{ borderRadius: 30 }} />
                   <span
                     style={{
                       color: 'black',
@@ -138,6 +143,8 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
         handleMenuOpen={handleMobileMenuOpen}
         handleMenuClose={handleMenuClose}
         anchorEl={mobileMoreAnchorEl}
+        handleLogout={logoutGmail}
+        handleLoginLocal={loginLocal}
       />
       <DefaultMenu
         isMenuOpen={Boolean(anchorEl)}
