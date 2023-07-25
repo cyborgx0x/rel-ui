@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 
 import { Box, Menu, MenuItem } from '@mui/material';
 
+import { useCommonInfo } from '@/contexts/Common';
+
 import { ThemeModeContext } from '../../../contexts';
 import { Messages, Notifications, SignOut, Settings } from '../../Actions';
 import { ThemeSwitcher } from '../ThemeSwitcher';
@@ -11,10 +13,20 @@ interface MobileMenuProps {
   handleMenuOpen: (event: React.MouseEvent<HTMLElement>) => void;
   handleMenuClose: () => void;
   anchorEl: HTMLElement | null;
+  handleLogout: () => void;
+  handleLoginLocal: () => void;
 }
 
-export const MobileMenu = ({ isMenuOpen, handleMenuOpen, handleMenuClose, anchorEl }: MobileMenuProps) => {
+export const MobileMenu = ({
+  isMenuOpen,
+  handleMenuOpen,
+  handleMenuClose,
+  anchorEl,
+  handleLogout,
+  handleLoginLocal,
+}: MobileMenuProps) => {
   const { toggleThemeMode } = useContext(ThemeModeContext);
+  const { inforGmail } = useCommonInfo();
 
   return (
     <Menu
@@ -33,7 +45,7 @@ export const MobileMenu = ({ isMenuOpen, handleMenuOpen, handleMenuClose, anchor
       onClose={handleMenuClose}
     >
       <Box sx={{ textAlign: 'center' }}>
-        <MenuItem onClick={toggleThemeMode}>
+        {/* <MenuItem onClick={toggleThemeMode}>
           <ThemeSwitcher disableTooltip />
           Toggle Theme
         </MenuItem>
@@ -48,11 +60,18 @@ export const MobileMenu = ({ isMenuOpen, handleMenuOpen, handleMenuClose, anchor
         <MenuItem onClick={handleMenuClose}>
           <Settings disableTooltip />
           Settings
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <SignOut disableTooltip onClick={() => alert('Signing out...')} />
-          Sign Out
-        </MenuItem>
+        </MenuItem> */}
+        {inforGmail ? (
+          <MenuItem onClick={handleLogout}>
+            <SignOut disableTooltip onClick={() => alert('Signing out...')} />
+            Sign Out
+          </MenuItem>
+        ) : (
+          <MenuItem onClick={handleLoginLocal}>
+            <SignOut disableTooltip onClick={() => alert('Signing in...')} />
+            Sign In
+          </MenuItem>
+        )}
       </Box>
     </Menu>
   );

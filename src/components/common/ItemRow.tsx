@@ -2,38 +2,61 @@ import { Link, Stack } from '@mui/material';
 
 interface Props {
   title: string;
-  content?: string;
-  contentLink?: string;
+  content?: any;
+  contentLink?: any;
   isEmail?: boolean;
 }
 const ItemRow = (props: Props) => {
   const { title, content, contentLink, isEmail } = props;
-  const handleClick = () => {
+  const handleClick = (item: string) => {
     if (isEmail) {
-      window.open(`mailto:${contentLink}`, '_blank');
+      window.open(`mailto:${item}`, '_blank');
     } else {
-      window.open(contentLink, '_blank');
+      window.open(`https://www.facebook.com/${item}`, '_blank');
+    }
+  };
+  const handleData = () => {
+    if (content) {
+      return (
+        <div style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>
+          {content.map((item, index) => (
+            <p key={index} style={{ whiteSpace: 'pre-line' }}>
+              {item}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return <span style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>{content}</span>;
+  };
+  const handleDataLink = () => {
+    if (contentLink) {
+      return (
+        <div style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>
+          {contentLink.map((item, index) => (
+            <div key={index}>
+              <Link
+                variant="body2"
+                // href={`https://www.facebook.com/${item}`}
+                underline={isEmail ? 'none' : 'always'}
+                onClick={() => {
+                  handleClick(item);
+                }}
+              >
+                {isEmail ? item : `https://www.facebook.com/${item}`}
+              </Link>
+            </div>
+          ))}
+        </div>
+      );
     }
   };
   return (
     <div>
       <Stack direction="row" spacing={1} paddingX={4} paddingY={1}>
         <span style={{ color: 'black', fontSize: 16, fontWeight: '-moz-initial', flex: 1 }}>{title}</span>
-        {content && <span style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>{content}</span>}
-        {contentLink && (
-          <div style={{ color: 'GrayText', fontSize: 16, flex: 5 }}>
-            <Link
-              variant="body2"
-              href={contentLink}
-              underline={isEmail ? 'none' : 'always'}
-              onClick={() => {
-                handleClick();
-              }}
-            >
-              {contentLink}
-            </Link>
-          </div>
-        )}
+        {content && handleData()}
+        {contentLink && handleDataLink()}
       </Stack>
     </div>
   );

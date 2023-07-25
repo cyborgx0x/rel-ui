@@ -25,9 +25,21 @@ const useAuthService = () => {
         });
     });
   };
+  const loginLocal = (body = {}) => {
+    return new Promise((resolve, reject) => {
+      methodPost(urlApi.auth.loginLocal, body)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
   return {
     loginGoogle,
     logoutAccount,
+    loginLocal,
   };
 };
 export default useAuthService;
