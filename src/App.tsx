@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GetAppOutlined } from '@mui/icons-material';
+import { gapi } from 'gapi-script';
 import { SnackbarProvider } from 'notistack';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -26,37 +27,43 @@ function App() {
     }),
     [],
   );
-
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: '895399845840-c0eisal6806qg2hgsejkh3hksno2onjb.apps.googleusercontent.com',
+        scope: '',
+      });
+    }
+    gapi.load('client:auth2', start);
+  });
   return (
-    <GoogleOAuthProvider clientId="895399845840-c0eisal6806qg2hgsejkh3hksno2onjb.apps.googleusercontent.com">
-      <ReduxProvider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <CommonProvider>
-            <AuthProvider>
-              <ThemeModeContext.Provider value={themeMode}>
-                <ThemeConfig mode={mode}>
-                  <ThemePrimaryColor mode={mode}>
-                    <BaseOptionChartStyle />
-                    <GlobalStyles />
-                    <SnackbarProvider
-                      maxSnack={3}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                    >
-                      <Wrapper>
-                        <ListRouter />
-                      </Wrapper>
-                    </SnackbarProvider>
-                  </ThemePrimaryColor>
-                </ThemeConfig>
-              </ThemeModeContext.Provider>
-            </AuthProvider>
-          </CommonProvider>
-        </PersistGate>
-      </ReduxProvider>
-    </GoogleOAuthProvider>
+    <ReduxProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <CommonProvider>
+          <AuthProvider>
+            <ThemeModeContext.Provider value={themeMode}>
+              <ThemeConfig mode={mode}>
+                <ThemePrimaryColor mode={mode}>
+                  <BaseOptionChartStyle />
+                  <GlobalStyles />
+                  <SnackbarProvider
+                    maxSnack={3}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <Wrapper>
+                      <ListRouter />
+                    </Wrapper>
+                  </SnackbarProvider>
+                </ThemePrimaryColor>
+              </ThemeConfig>
+            </ThemeModeContext.Provider>
+          </AuthProvider>
+        </CommonProvider>
+      </PersistGate>
+    </ReduxProvider>
   );
 }
 

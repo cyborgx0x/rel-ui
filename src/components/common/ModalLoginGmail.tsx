@@ -14,7 +14,7 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from 'react-google-login';
 
 import Logo from '@/assets/image/ic_logo.png';
 import { useCommonInfo } from '@/contexts/Common';
@@ -39,7 +39,7 @@ const ModalLoginGmail = () => {
   const { loginGmail, handleUserLocal } = useAuth();
   const handleClose = () => setShowModalLoginGmail({ isShow: false });
   const handleResGoogle = async (credentialResponse: any) => {
-    await loginGmail(credentialResponse.credential);
+    await loginGmail(credentialResponse.tokenId);
     handleClose();
   };
   const [accountLocal, setAccountLocal] = React.useState({
@@ -55,7 +55,7 @@ const ModalLoginGmail = () => {
   };
   const handleKeyDown = (event: { keyCode: number }) => {
     if (event.keyCode === 13) {
-      handleUserLocal(accountLocal);
+      handleUserLocal(accountLocal, setAccountLocal);
     }
   };
   return (
@@ -84,15 +84,14 @@ const ModalLoginGmail = () => {
           </Typography>
 
           <GoogleLogin
-            shape="pill"
-            width="240"
-            theme="filled_blue"
-            onSuccess={(credentialResponse) => {
-              handleResGoogle(credentialResponse);
+            clientId="895399845840-c0eisal6806qg2hgsejkh3hksno2onjb.apps.googleusercontent.com"
+            onSuccess={(response) => {
+              console.log(response);
+              handleResGoogle(response);
             }}
-            onError={() => {
-              console.log('Login Failed');
-            }}
+            isSignedIn={false}
+            cookiePolicy="single_host_origin"
+            prompt="consent"
           />
 
           <Typography sx={{ marginTop: 2, marginBottom: 2 }}>----------------- or -----------------</Typography>
@@ -136,7 +135,7 @@ const ModalLoginGmail = () => {
             variant="contained"
             sx={{ marginTop: 1 }}
             onClick={() => {
-              handleUserLocal(accountLocal);
+              handleUserLocal(accountLocal, setAccountLocal);
             }}
           >
             Log In

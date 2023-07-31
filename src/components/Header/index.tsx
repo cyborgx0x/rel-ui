@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { AppBar, Box, Toolbar, Button, Stack } from '@mui/material';
-import { googleLogout } from '@react-oauth/google';
+import { gapi } from 'gapi-script';
 import { useHistory } from 'react-router-dom';
 
 import Logo from '@/assets/image/ic_logo.png';
@@ -42,11 +42,19 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
   };
   const logoutGmail = () => {
     logout();
-    googleLogout();
+    logoutGoogle();
     handleMenuClose();
     setInforGmail({ inforGmail: null });
   };
-
+  const logoutGoogle = () => {
+    const auth2 = gapi.auth2.getAuthInstance();
+    if (auth2 != null) {
+      auth2.signOut().then(() => {
+        auth2.disconnect();
+        console.log('Logout success');
+      });
+    }
+  };
   const loginLocal = () => {
     handleMenuClose();
     setShowModalLoginGmail({ isShow: true });
@@ -106,7 +114,13 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
             {inforGmail ? (
               <Button onClick={handleProfileMenuOpen}>
                 <Stack direction="row" spacing={1}>
-                  <img src={inforGmail.picture ? inforGmail.picture : Logo} alt="Example" width={30} height={30} style={{ borderRadius: 30 }} />
+                  <img
+                    src={inforGmail.picture ? inforGmail.picture : Logo}
+                    alt="Example"
+                    width={30}
+                    height={30}
+                    style={{ borderRadius: 30 }}
+                  />
                   <span
                     style={{
                       color: 'black',

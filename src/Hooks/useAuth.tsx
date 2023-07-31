@@ -1,4 +1,3 @@
-import { googleLogout } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 
 import { httpStatus } from '@/configs/Enums/httpStatus';
@@ -64,14 +63,14 @@ const useAuth = () => {
     const refreshToken = localStorage.getItem('refreshToken');
     const body = { refresh: refreshToken };
     await logoutAccount(body);
-    googleLogout();
     localStorage.removeItem('serviceToken');
     localStorage.removeItem('refreshToken');
     await setSession(undefined);
     setInforGmail({ inforGmail: null });
     dispatch({ type: 'LOGOUT' });
+    onNotify('success', 'Đăng xuất thành công');
   };
-  const handleUserLocal = async (accountLocal: any) => {
+  const handleUserLocal = async (accountLocal: any, setAccountLocal: any) => {
     setLoading(true);
     const res: any = await loginLocal(accountLocal);
     setLoading(false);
@@ -80,6 +79,7 @@ const useAuth = () => {
     const { access, refresh } = data || {};
     switch (status) {
       case httpStatus.StatusOK:
+        setAccountLocal({ username: '', password: '' });
         await setSession(access, refresh);
         setInforGmail({ inforGmail: { picture: '', name: accountLocal.username } });
         dispatch({
