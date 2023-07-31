@@ -1,5 +1,5 @@
-import { googleLogout } from '@react-oauth/google';
 import axios from 'axios';
+import { gapi } from 'gapi-script';
 import * as _ from 'lodash';
 
 import { useUser } from '@/contexts/User';
@@ -55,8 +55,18 @@ const useRequest = () => {
     return reject(err);
   };
 
+  const logoutGoogle = () => {
+    const auth2 = gapi.auth2.getAuthInstance();
+    if (auth2 != null) {
+      auth2.signOut().then(() => {
+        auth2.disconnect();
+        console.log('Logout success');
+      });
+    }
+  };
+
   const logout = async () => {
-    googleLogout();
+    logoutGoogle();
     localStorage.removeItem('serviceToken');
     localStorage.removeItem('refreshToken');
     setInforGmail({ inforGmail: null });
