@@ -47,7 +47,7 @@ export const CommonProvider = ({ children }: Props) => {
     }
   }, []);
   useEffect(() => {
-    localStorage.setItem('myAppData', JSON.stringify(commonInfo));
+    localStorage.setItem('myAppData', JSON.stringify({ ...commonInfo, isLoading: false }));
   }, [commonInfo]);
   return <CommonContext.Provider value={value}>{children}</CommonContext.Provider>;
 };
