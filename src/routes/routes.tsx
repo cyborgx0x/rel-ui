@@ -6,8 +6,6 @@ import AuthGuard from '@/components/Auth/AuthGuard';
 import GuestGuard from '@/components/Auth/GuestGuard';
 import { Footer } from '@/components/Footer';
 import { Layout } from '@/components/Layout';
-import Login from '@/pages/authentication/Login';
-import CommandCenter from '@/pages/Dashboard/CommandCenter';
 import PricingService from '@/pages/Pricing/PricingService';
 import SearchName from '@/pages/search/SearchName';
 
@@ -35,55 +33,6 @@ const ListRouter = () => {
             <AuthGuard>
               <Layout>
                 <PricingService />
-              </Layout>
-            </AuthGuard>
-          )}
-        />
-
-        <Route
-          key="camera"
-          path="/camera"
-          exact
-          render={(props) => (
-            <AuthGuard>
-              <Layout>
-                <CommandCenter />
-              </Layout>
-            </AuthGuard>
-          )}
-        />
-        <Route
-          key="ttdvcn"
-          path="/ttdvcn"
-          exact
-          render={(props) => (
-            <AuthGuard>
-              <Layout>
-                <CommandCenter />
-              </Layout>
-            </AuthGuard>
-          )}
-        />
-        <Route
-          key="map"
-          path="/map"
-          exact
-          render={(props) => (
-            <AuthGuard>
-              <Layout>
-                <CommandCenter />
-              </Layout>
-            </AuthGuard>
-          )}
-        />
-        <Route
-          key="private"
-          path="/camera/private"
-          exact
-          render={(props) => (
-            <AuthGuard>
-              <Layout>
-                <CommandCenter />
               </Layout>
             </AuthGuard>
           )}
