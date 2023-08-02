@@ -86,7 +86,13 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
             {/* <Messages total={15} />
             <Notifications total={20} /> */}
             {/* <UserAccount onClick={handleProfileMenuOpen} /> */}
-            <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
+            <Button
+              variant="text"
+              style={{ color: 'black', textTransform: 'none' }}
+              onClick={() => {
+                navigate.push('/demo');
+              }}
+            >
               About
             </Button>
             <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>

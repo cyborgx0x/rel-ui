@@ -6,6 +6,7 @@ import AuthGuard from '@/components/Auth/AuthGuard';
 import GuestGuard from '@/components/Auth/GuestGuard';
 import { Footer } from '@/components/Footer';
 import { Layout } from '@/components/Layout';
+import SearchPersonInfo from '@/pages/PersonInfo/PersonInfo';
 import PricingService from '@/pages/Pricing/PricingService';
 import SearchName from '@/pages/search/SearchName';
 
@@ -21,6 +22,18 @@ const ListRouter = () => {
             <GuestGuard>
               <Layout>
                 <SearchName />
+              </Layout>
+            </GuestGuard>
+          )}
+        />
+        <Route
+          key="demo"
+          path="/demo"
+          exact
+          render={(props) => (
+            <GuestGuard>
+              <Layout>
+                <SearchPersonInfo />
               </Layout>
             </GuestGuard>
           )}
