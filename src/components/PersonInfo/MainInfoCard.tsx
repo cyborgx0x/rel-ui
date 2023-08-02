@@ -8,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import ShareIcon from '@mui/icons-material/Share';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
@@ -46,20 +47,20 @@ export default function MainInfoCard() {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             <CardMedia
               component="img"
               height="50"
-              image="https://lh3.googleusercontent.com/ogw/AGvuzYZfRcFP5yPEjZGjOfBRjX1OKod-Lb1cvS0CU7T-MEo=s32-c-mo"
-              alt="Paella dish"
+              image="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+              alt="Avatar"
             />
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="copy-content">
             <ContentCopyIcon />
           </IconButton>
         }
@@ -67,15 +68,20 @@ export default function MainInfoCard() {
         subheader="031095002414"
       />
       <CardContent>
-        <Typography variant="h3" color="text.primary" mt={0.5}>
-          Nguyễn Khánh Thuận
-        </Typography>
-        <Typography variant="body1" color="text.primary" mt={0.5}>
-          Bắc Hải, Thị Trấn Vĩnh Bảo, Hải Phòng
-        </Typography>
-        <Typography variant="body1" color="text.primary" mt={0.5}>
-          0852134401
-        </Typography>
+        <IconButton aria-label="address">
+          <HomeIcon />
+          <Typography variant="body1" color="text.primary" mt={0.5}>
+            Bắc Hải, Thị Trấn Vĩnh Bảo, Hải Phòng
+          </Typography>
+        </IconButton>
+        <IconButton aria-label="phone">
+          <PhoneAndroidIcon />
+          <Typography variant="body1" color="text.primary" mt={0.5}>
+            0852134401
+            <br />
+          </Typography>
+
+        </IconButton>
         <IconButton aria-label="email">
           <EmailIcon />
           <Typography variant="body1" color="text.primary" mt={0.5}>
@@ -92,8 +98,7 @@ export default function MainInfoCard() {
       </CardContent>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of
-          frozen peas along with the mussels, if you like.
+          <p>Hello</p>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
