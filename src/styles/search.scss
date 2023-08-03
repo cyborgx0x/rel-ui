@@ -10,6 +10,27 @@
   background-color: transparent !important;
   color: #FFF !important;
 }
+.gridbg {
+  background-image: linear-gradient(#ccccdc 1px, transparent 1px),
+    linear-gradient(to right, #ccccdc 1px, transparent 1px);
+  background-size: 100px 100px;
+}
+
+.box {
+  display: grid;
+  background: radial-gradient(transparent, #ffffff 85%);
+  height: 100vh;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: 900;
+  color: #333343;
+  margin: auto;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
+    sans-serif;
+}
 
 .tinh-custom {
   width: 100%;

@@ -1,23 +1,14 @@
 import React from 'react';
 
 import { Card, CardContent, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 
-interface PersonInfoProps {
-  gender: string;
-  ethnic: string;
-  marriageStatus: string;
-  bloodLine: string;
-  dob: string;
-  placeOfBirth: string;
-  country: string;
-}
+import { PersonInfoProps } from '@/interfaces/personInfo'
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275,
-    maxWidth: 400,
-    margin: '20px',
+    // margin: '10px',
   },
   title: {
     fontSize: 18,
@@ -26,13 +17,11 @@ const useStyles = makeStyles({
 });
 
 const PersonInfoCard: React.FC<PersonInfoProps> = ({
-  gender,
-  ethnic,
-  marriageStatus,
-  bloodLine,
-  dob,
-  placeOfBirth,
-  country,
+  hoVaTen,
+  quocTich,
+  soDinhDanh,
+  soCMND,
+  type,
 }) => {
   const classes = useStyles();
 
@@ -40,28 +29,16 @@ const PersonInfoCard: React.FC<PersonInfoProps> = ({
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textPrimary" gutterBottom>
-          Personal Information
+          {type}: {hoVaTen}
         </Typography>
         <Typography variant="body2" component="p">
-          Gender: {gender}
+          Quốc tịch: {quocTich}
         </Typography>
         <Typography variant="body2" component="p">
-          Ethnic: {ethnic}
+          Số định danh: {soDinhDanh}
         </Typography>
         <Typography variant="body2" component="p">
-          Marriage Status: {marriageStatus}
-        </Typography>
-        <Typography variant="body2" component="p">
-          Blood Line: {bloodLine}
-        </Typography>
-        <Typography variant="body2" component="p">
-          Date of Birth: {dob}
-        </Typography>
-        <Typography variant="body2" component="p">
-          Place of Birth: {placeOfBirth}
-        </Typography>
-        <Typography variant="body2" component="p">
-          Country: {country}
+          Số CMND: {soCMND}
         </Typography>
       </CardContent>
     </Card>

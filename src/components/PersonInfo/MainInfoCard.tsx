@@ -4,29 +4,33 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EmailIcon from '@mui/icons-material/Email';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import InfoIcon from '@mui/icons-material/Info';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import ShareIcon from '@mui/icons-material/Share';
+import { Button, CardActionArea, CardActions, Card, CardContent, Grid, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import Collapse from '@mui/material/Collapse';
 import { red } from '@mui/material/colors';
+import Divider from '@mui/material/Divider';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 
-import PersonInfoCard from '@/components/PersonInfo/RelatedCard';
+
+import CustomizableList from './ListItem';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'left',
+  color: theme.palette.text.secondary,
+}));
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -40,14 +44,67 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export default function MainInfoCard() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(true);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  const data = {
+    'soDinhDanh': '034200003214',
+    'soCMND': '',
+    'hoTen': {
+      'ho': '',
+      'chuDem': '',
+      'ten': 'PHẠM TRUNG LIN',
+    },
+    'gioiTinh': 1,
+    'danToc': '01',
+    'tonGiao': '00',
+    'tinhTrangHonNhan': '1',
+    'nhomMau': '00',
+    'ngayThangNamSinh': {
+      'nam': 2000,
+      'ngayThangNam': '20000709',
+    },
+    'noiDangKyKhaiSinh': {
+      'maTinhThanh': 34,
+      'maQuanHuyen': 344,
+      'maPhuongXa': 13234,
+      'chiTiet': '',
+      'quocGia': 'VN',
+    },
+    'quocTich': 'VN',
+    'queQuan': {
+      'maTinhThanh': 34,
+      'maQuanHuyen': 344,
+      'maPhuongXa': 13234,
+      'chiTiet': '',
+      'quocGia': 'VN',
+    },
+    'thuongTru': {
+      'maTinhThanh': 34,
+      'maQuanHuyen': 344,
+      'maPhuongXa': 13234,
+      'chiTiet': 'THÔN TRỰC NHO',
+      'quocGia': 'VN',
+    },
+    'noiOHienTai': {
+      'maTinhThanh': 34,
+      'maQuanHuyen': 344,
+      'maPhuongXa': 13234,
+      'chiTiet': 'THÔN TRỰC NHO',
+      'quocGia': 'VN',
+    },
+  }
+  const items = [
+    { icon: <HomeIcon />, primaryText: '63 Lê Văn Lương, Trung Hòa, Cầu Giấy, Hà Nội' },
+    { icon: <PhoneAndroidIcon />, primaryText: 'Số Điện Thoại' },
+    { icon: <EmailIcon />, primaryText: 'Email' },
+    { icon: <FacebookIcon />, primaryText: 'https://www.facebook.com/w4rf0t' },
+  ];
   return (
-    <Card>
+
+    <Card sx={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -67,43 +124,27 @@ export default function MainInfoCard() {
         title="Hoàng Kim Phú"
         subheader="031095002414"
       />
-      <CardContent>
-        <IconButton aria-label="address">
-          <HomeIcon />
-          <Typography variant="body1" color="text.primary" mt={0.5}>
-            Bắc Hải, Thị Trấn Vĩnh Bảo, Hải Phòng
-          </Typography>
-        </IconButton>
-        <IconButton aria-label="phone">
-          <PhoneAndroidIcon />
-          <Typography variant="body1" color="text.primary" mt={0.5}>
-            0852134401
-            <br />
-          </Typography>
 
-        </IconButton>
-        <IconButton aria-label="email">
-          <EmailIcon />
-          <Typography variant="body1" color="text.primary" mt={0.5}>
-            leeboykt@gmail.com
-          </Typography>
-        </IconButton>
-
-        <IconButton aria-label="share">
-          <FacebookIcon />
-          <Typography variant="body1" color="text.primary" mt={0.5}>
-            http://facebook.com/3242342343
-          </Typography>
-        </IconButton>
-      </CardContent>
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <p>Hello</p>
-        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <CardMedia
+              sx={{ borderRadius: '.5rem' }}
+              component="img"
+              height="194"
+              image="https://plus.unsplash.com/premium_photo-1670002383626-10c63bbe67d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+              alt="Avatar"
+            />
+          </Grid>
+          <Grid item xs={8}>
+            <CustomizableList items={items} />
+          </Grid>
+        </Grid>
       </CardContent>
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <InstagramIcon />
+          <InfoIcon />
         </IconButton>
 
         <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
@@ -111,27 +152,61 @@ export default function MainInfoCard() {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken,
-            shrimp and chorizo, and cook, stirring occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp
-            to a large plate and set aside, leaving chicken and chorizo in the pan. Add pimentón, bay leaves, garlic,
-            tomatoes, onion, salt and pepper, and cook, stirring often until thickened and fragrant, about 10 minutes.
-            Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook without stirring,
-            until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without stirring, until mussels have opened and
-            rice is just tender, 5 to 7 minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>Set aside off of the heat to let rest for 10 minutes, and then serve.</Typography>
+        <CardContent style={{ textAlign: 'left' }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Typography variant='button' component='h4'>Số định danh</Typography>
+              <Typography paragraph>
+                {data.soDinhDanh}
+              </Typography>
+              <Typography variant='button' component='h4'>Giới tính</Typography>
+
+              <Typography paragraph>
+                {data.gioiTinh ? 'Nam' : 'Nữ'}
+              </Typography>
+              <Typography variant='button' component='h4'>Dân tộc</Typography>
+
+              <Typography paragraph>
+                {data.danToc ? 'Kinh' : 'Nữ'}
+              </Typography>
+              <Typography variant='button' component='h4'>Sinh năm</Typography>
+
+              <Typography paragraph>
+                {data.ngayThangNamSinh.nam}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+
+              <Typography variant='button' component='h4'>Họ Tên</Typography>
+              <Typography paragraph>
+                Họ tên: {data.hoTen.ho} {data.hoTen.chuDem} {data.hoTen.ten}
+              </Typography>
+              <Typography variant='button' component='h4'>Tôn giáo</Typography>
+
+              <Typography paragraph>
+                {data.tonGiao ? 'Không' : 'Nữ'}
+              </Typography>
+              <Typography variant='button' component='h4'>Tình trạng hôn nhân</Typography>
+
+              <Typography paragraph>
+                {data.tinhTrangHonNhan ? 'Đã kết hôn' : 'Chưa kết hôn'}
+              </Typography>
+              <Typography variant='button' component='h4'>Nhóm máu</Typography>
+
+              <Typography paragraph>
+                {data.nhomMau}
+              </Typography>
+
+            </Grid>
+          </Grid>
+
+
+
         </CardContent>
       </Collapse>
+
     </Card>
+
+
   );
 }

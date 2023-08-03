@@ -1,28 +1,15 @@
 import * as React from 'react';
 
 
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-interface PersonInfoProps {
-    gender: string;
-    ethnic: string;
-    marriageStatus: string;
-    bloodLine: string;
-    dob: string;
-    placeOfBirth: string;
-    country: string;
-  }
+import { GridItems } from '@/interfaces/personInfo';
 
-interface GridItem {
-  xs: number;
-  content: string;
-}
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'whitesmoke',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
@@ -30,20 +17,21 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 interface BasicGridProps {
-  gridItems: PersonInfoProps[];
+  gridItems: GridItems[];
 }
 
 const BasicGrid: React.FC<BasicGridProps> = ({ gridItems }) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        {gridItems.map((item, index) => (
-          <Grid key={index} item xs={item.xs}>
-            <Item>{item.content}</Item>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+
+    <Grid container spacing={2} mt={0.5}>
+      {gridItems.map((item, index) => (
+        <Grid key={index} item xs={item.xs} md={item.md}>
+          <Item>
+            {item.content}
+          </Item>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
