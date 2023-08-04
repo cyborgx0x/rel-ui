@@ -26,7 +26,9 @@ export default function CustomizableList({ items }: CustomizableListProps) {
         <List>
           {items.map((item, index) => (
             <ListItem key={index} disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                onClick={() => { navigator.clipboard.writeText(`${item.primaryText}`) }}
+              >
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>

@@ -10,22 +10,12 @@ import icNotFound from '@/assets/image/ic_not_found.png';
 import ItemRow from '@/components/common/ItemRow';
 import useShowModalLoginGmail from '@/Hooks/common/useShowModalLoginGmail';
 import useSearch from '@/Hooks/useSearch';
+import { DataSearch } from '@/interfaces/personInfo';
 
-export interface DataSearch {
-  Gender: string[];
-  PII: string[];
-  FullName: string[];
-  Birthday: string[];
-  Address: string[];
-  Email: string[];
-  PhoneNum: string[];
-  Facebook: string[];
-  Username: string[];
-  TypeVehicle: string[];
-  Plate: string[];
-  remaining: number;
-}
-const SearchName = () => {
+import SearchPersonInfo from '../PersonInfo/PersonInfo';
+
+
+const SearchDetail = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const handleRemainToken = async () => {
     const remainToken = await getRemainToken();
@@ -38,7 +28,6 @@ const SearchName = () => {
 
   const [data, setData] = useState<DataSearch>({} as DataSearch);
 
-  const { Gender, PII, FullName, Birthday, Address, Email, PhoneNum, Facebook, Username, TypeVehicle, Plate } = data;
   const [remainToken, setRemainToken] = useState<number | string>(0);
 
   const { setShowModalLoginGmail } = useShowModalLoginGmail();
@@ -77,15 +66,15 @@ const SearchName = () => {
         style={
           isMobile
             ? {
-                marginTop: !isShow ? 40 : 40,
-                marginLeft: !isShow ? 10 : 0,
-                marginRight: !isShow ? 10 : 0,
-              }
+              marginTop: !isShow ? 40 : 40,
+              marginLeft: !isShow ? 10 : 0,
+              marginRight: !isShow ? 10 : 0,
+            }
             : {
-                marginTop: !isShow ? 120 : 40,
-                marginLeft: !isShow ? 100 : 0,
-                marginRight: !isShow ? 100 : 0,
-              }
+              marginTop: !isShow ? 120 : 40,
+              marginLeft: !isShow ? 100 : 0,
+              marginRight: !isShow ? 100 : 0,
+            }
         }
       >
         {!isShow && (
@@ -159,22 +148,11 @@ const SearchName = () => {
           </Typography>
         )}
       </Stack>
-      {! _.isEmpty(data) && (
+      {!_.isEmpty(data) && (
         <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
-          <ItemRow title="PII" content={PII || ['Không tìm thấy dữ liệu']} />
-          <ItemRow title="Full Name" content={FullName || ['Không tìm thấy dữ liệu']} />
+          <></>
           {accessToken ? (
-            <>
-              <ItemRow title="Gender" content={Gender || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="Birthday" content={Birthday || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="Address" content={Address || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="Email" contentLink={Email || ['Không tìm thấy dữ liệu']} isEmail={true} />
-              <ItemRow title="Phone Number" content={PhoneNum || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="Facebook" contentLink={Facebook || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="User Name" content={Username || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="Plate" content={Plate || ['Không tìm thấy dữ liệu']} />
-              <ItemRow title="Type Vehicle" content={TypeVehicle || ['Không tìm thấy dữ liệu']} />
-            </>
+            <SearchPersonInfo dataRes={data} />
           ) : (
             <Box
               sx={{
@@ -201,13 +179,15 @@ const SearchName = () => {
         </Box>
       )}
 
-      {_.isEmpty(data) && isShow && (
-        <Stack style={{ marginTop: 100 }} alignItems="center">
-          <Box component="img" src={icNotFound} sx={{ width: 100, height: 100 }} />
-          <span style={{ color: 'GrayText', fontSize: 20 }}>No data found</span>
-        </Stack>
-      )}
+      {
+        _.isEmpty(data) && isShow && (
+          <Stack style={{ marginTop: 100 }} alignItems="center">
+            <Box component="img" src={icNotFound} sx={{ width: 100, height: 100 }} />
+            <span style={{ color: 'GrayText', fontSize: 20 }}>No data found</span>
+          </Stack>
+        )
+      }
     </>
   );
 };
-export default SearchName;
+export default SearchDetail;

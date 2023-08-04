@@ -6,6 +6,7 @@ import { alpha, ThemeProvider, createTheme, useTheme } from '@mui/material/style
 import ComponentsOverrides from '@/theme/overrides';
 import palette from '@/theme/palette';
 import { customShadows } from '@/theme/shadows';
+import '@/styles/bitter-font.css';
 
 interface IProps {
   children: React.ReactNode;

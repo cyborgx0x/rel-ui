@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EmailIcon from '@mui/icons-material/Email';
@@ -7,30 +8,24 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import { Button, CardActionArea, CardActions, Card, CardContent, Grid, Typography } from '@mui/material';
+import { CardActions, Card, CardContent, Grid, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import Collapse from '@mui/material/Collapse';
 import { red } from '@mui/material/colors';
-import Divider from '@mui/material/Divider';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
+
+import { DataSearch } from '@/interfaces/personInfo';
+import { sampleData } from '@/pages/PersonInfo/PersonInfoAnonymous';
 
 import CustomizableList from './ListItem';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'left',
-  color: theme.palette.text.secondary,
-}));
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -42,66 +37,24 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-
-export default function MainInfoCard() {
+interface IProps {
+  dataRes: DataSearch
+}
+export default function MainInfoCard(props: IProps) {
   const [expanded, setExpanded] = React.useState(true);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const data = {
-    'soDinhDanh': '034200003214',
-    'soCMND': '',
-    'hoTen': {
-      'ho': '',
-      'chuDem': '',
-      'ten': 'PHẠM TRUNG LIN',
-    },
-    'gioiTinh': 1,
-    'danToc': '01',
-    'tonGiao': '00',
-    'tinhTrangHonNhan': '1',
-    'nhomMau': '00',
-    'ngayThangNamSinh': {
-      'nam': 2000,
-      'ngayThangNam': '20000709',
-    },
-    'noiDangKyKhaiSinh': {
-      'maTinhThanh': 34,
-      'maQuanHuyen': 344,
-      'maPhuongXa': 13234,
-      'chiTiet': '',
-      'quocGia': 'VN',
-    },
-    'quocTich': 'VN',
-    'queQuan': {
-      'maTinhThanh': 34,
-      'maQuanHuyen': 344,
-      'maPhuongXa': 13234,
-      'chiTiet': '',
-      'quocGia': 'VN',
-    },
-    'thuongTru': {
-      'maTinhThanh': 34,
-      'maQuanHuyen': 344,
-      'maPhuongXa': 13234,
-      'chiTiet': 'THÔN TRỰC NHO',
-      'quocGia': 'VN',
-    },
-    'noiOHienTai': {
-      'maTinhThanh': 34,
-      'maQuanHuyen': 344,
-      'maPhuongXa': 13234,
-      'chiTiet': 'THÔN TRỰC NHO',
-      'quocGia': 'VN',
-    },
-  }
+  const { dataRes } = props
+  const [data, setData] = useState<DataSearch>(dataRes)
+
   const items = [
-    { icon: <HomeIcon />, primaryText: '63 Lê Văn Lương, Trung Hòa, Cầu Giấy, Hà Nội' },
-    { icon: <PhoneAndroidIcon />, primaryText: 'Số Điện Thoại' },
-    { icon: <EmailIcon />, primaryText: 'Email' },
-    { icon: <FacebookIcon />, primaryText: 'https://www.facebook.com/w4rf0t' },
+    { icon: <HomeIcon />, primaryText: 'Xã Minh Quang, Huyện Vũ Thư, Tỉnh Thái Bình' },
+    { icon: <PhoneAndroidIcon />, primaryText: '0852134401' },
+    { icon: <EmailIcon />, primaryText: 'leeboykt@gmail.com' },
+    { icon: <FacebookIcon />, primaryText: 'https://www.facebook.com/nguyenkhanhthuan' },
   ];
+
   return (
 
     <Card sx={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}>
@@ -117,12 +70,15 @@ export default function MainInfoCard() {
           </Avatar>
         }
         action={
-          <IconButton aria-label="copy-content">
+          <IconButton
+            aria-label="copy-content"
+            onClick={() => { navigator.clipboard.writeText(`${data.hoTen.ho} ${data.hoTen.chuDem} ${data.hoTen.ten}`) }}
+          >
             <ContentCopyIcon />
           </IconButton>
         }
-        title="Hoàng Kim Phú"
-        subheader="031095002414"
+        title={`${data.hoTen.ho} ${data.hoTen.chuDem} ${data.hoTen.ten}`}
+        subheader={data.soDinhDanh}
       />
 
       <CardContent>
@@ -132,7 +88,7 @@ export default function MainInfoCard() {
               sx={{ borderRadius: '.5rem' }}
               component="img"
               height="194"
-              image="https://plus.unsplash.com/premium_photo-1670002383626-10c63bbe67d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+              image="https://wallpapershome.com/images/wallpapers/barbara-palvin-1440x2560-victorias-secret-angel-model-fashion-portrait-12712.jpg"
               alt="Avatar"
             />
           </Grid>
@@ -179,7 +135,7 @@ export default function MainInfoCard() {
 
               <Typography variant='button' component='h4'>Họ Tên</Typography>
               <Typography paragraph>
-                Họ tên: {data.hoTen.ho} {data.hoTen.chuDem} {data.hoTen.ten}
+                {data.hoTen.ho} {data.hoTen.chuDem} {data.hoTen.ten}
               </Typography>
               <Typography variant='button' component='h4'>Tôn giáo</Typography>
 

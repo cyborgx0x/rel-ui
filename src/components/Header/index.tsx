@@ -90,10 +90,10 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
               variant="text"
               style={{ color: 'black', textTransform: 'none' }}
               onClick={() => {
-                navigate.push('/demo');
+                navigate.push('/full_search');
               }}
             >
-              About
+              Search
             </Button>
             <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
               Product

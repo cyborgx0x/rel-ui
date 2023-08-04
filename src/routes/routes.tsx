@@ -6,8 +6,8 @@ import AuthGuard from '@/components/Auth/AuthGuard';
 import GuestGuard from '@/components/Auth/GuestGuard';
 import { Footer } from '@/components/Footer';
 import { Layout } from '@/components/Layout';
-import SearchPersonInfo from '@/pages/PersonInfo/PersonInfo';
 import PricingService from '@/pages/Pricing/PricingService';
+import SearchDetail from '@/pages/search/SearchDetail';
 import SearchName from '@/pages/search/SearchName';
 
 const ListRouter = () => {
@@ -27,13 +27,13 @@ const ListRouter = () => {
           )}
         />
         <Route
-          key="demo"
-          path="/demo"
+          key="full_search"
+          path="/full_search"
           exact
           render={(props) => (
             <GuestGuard>
               <Layout>
-                <SearchPersonInfo />
+                <SearchDetail />
               </Layout>
             </GuestGuard>
           )}

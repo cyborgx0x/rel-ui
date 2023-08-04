@@ -1,30 +1,20 @@
 import Container from '@mui/material/Container';
 
-import BasicGrid from '@/components/Layout/RelatedSection'
+import BlurItem from '@/components/Layout/Blurred';
+import BasicGrid from '@/components/Layout/MainGridSection'
 import MainInfoCard from '@/components/PersonInfo/MainInfoCard';
 import StandardImageList from '@/components/PersonInfo/PersonMedias';
 import PersonInfoCard from '@/components/PersonInfo/RelatedCard';
+import { DataSearch } from '@/interfaces/personInfo';
 
-const SearchPersonInfo = () => {
-  const relatedPerson = [
-    {
-      'hoVaTen': 'PHẠM VĂN NƠI',
-      'quocTich': 'VN',
-      'soDinhDanh': '034069018391',
-      'soCMND': '151282619',
-      'type': 'cha',
-    },
-    {
-      'hoVaTen': 'PHẠM THỊ TƠ',
-      'quocTich': 'VN',
-      'soDinhDanh': '034175013724',
-      'soCMND': '151956852',
-      'type': 'me',
-    },
+interface IProps {
+  dataRes: DataSearch
+}
+const SearchPersonInfo = (props: IProps) => {
+  const { dataRes } = props
+  const { relatedPerson } = dataRes
 
-  ]
-
-  const mainContent = <MainInfoCard />
+  const mainContent = <MainInfoCard dataRes={dataRes} />
   const instagramCard = <StandardImageList />
   const cleanData = (item: any) => {
     const fieldList = [
@@ -56,10 +46,22 @@ const SearchPersonInfo = () => {
   //   content: instagramCard,
   // }
   // gridItems.push(item)
+  const relatedItem = (
+    <BlurItem>
+      {relatedPerson.map(item => (
+        <PersonInfoCard
+          {...item}
+          key={item.hoVaTen}
+        />
+      ))}
+    </BlurItem>
+  )
   const mainItem = [
     { xs: 12, md: 8, content: mainContent },
-    { xs: 12, md: 4, content: <BasicGrid gridItems={gridItems} /> },
-    { xs: 12, md: 4, content: instagramCard },
+    {
+      xs: 12, md: 4, content: relatedItem,
+    },
+    // { xs: 12, md: 4, content: instagramCard },
   ]
   return (
     <div id="mainThread">

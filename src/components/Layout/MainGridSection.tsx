@@ -7,30 +7,32 @@ import { styled } from '@mui/material/styles';
 
 import { GridItems } from '@/interfaces/personInfo';
 
+
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'whitesmoke',
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'left',
+  textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
 
-const MainGrid: React.FC<GridItems> = (gridItem) => {
+interface BasicGridProps {
+  gridItems: GridItems[];
+}
+
+const BasicGrid: React.FC<BasicGridProps> = ({ gridItems }) => {
   return (
 
-    <Grid container spacing={0.5}>
-
-      <Grid xs={gridItem.xs} md={gridItem.md}>
-        <Item>
-          {gridItem.content}
-        </Item>
-      </Grid>
-      <Grid xs={gridItem.xs} md={gridItem.md}>
-        <Item>{gridItem.content}</Item>
-      </Grid>
-
+    <Grid container spacing={2} mt={0.5}>
+      {gridItems.map((item, index) => (
+        <Grid key={index} item xs={item.xs} md={item.md}>
+          <Item>
+            {item.content}
+          </Item>
+        </Grid>
+      ))}
     </Grid>
   );
 };
 
-export default MainGrid;
+export default BasicGrid;

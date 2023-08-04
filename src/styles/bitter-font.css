@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+
+body {
+    font-family: 'Bitter', sans-serif;
+    /* Use 'sans-serif' as fallback */
+}

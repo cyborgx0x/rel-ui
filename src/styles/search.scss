@@ -1,4 +1,7 @@
-.rti--container{
+body {
+  font-family: 'Bitter', serif;
+}
+.rti--container {
   background: #121212 !important;
   background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) !important;
   border: 1px solid rgba(144, 202, 249, 0.5) !important;
@@ -6,9 +9,9 @@
 .tagsSearch {
   color: #121212 !important;
 }
-.inputSearch{
+.inputSearch {
   background-color: transparent !important;
-  color: #FFF !important;
+  color: #fff !important;
 }
 .gridbg {
   background-image: linear-gradient(#ccccdc 1px, transparent 1px),
@@ -28,130 +31,129 @@ h1 {
   color: #333343;
   margin: auto;
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
 }
 
 .tinh-custom {
   width: 100%;
-  .rdrDefinedRangesWrapper{
+  .rdrDefinedRangesWrapper {
     background: transparent !important;
     border-right: 1px solid rgba(144, 202, 249, 0.5);
-    .rdrStaticRanges{
+    .rdrStaticRanges {
       .rdrStaticRange .rdrStaticRangeLabel:hover {
-        background:rgba(144, 202, 249, 0.5)  !important;
+        background: rgba(144, 202, 249, 0.5) !important;
         transition: 0.7s;
-        color: #FFF !important;
+        color: #fff !important;
       }
-      .rdrStaticRangeSelected{
+      .rdrStaticRangeSelected {
         color: #90caf9 !important;
       }
       .rdrStaticRange {
         background: transparent !important;
-        color: #FFF ;
+        color: #fff;
         border-bottom: 1px solid rgba(144, 202, 249, 0.5);
         font-weight: bold;
       }
     }
     .rdrInputRanges .rdrInputRange {
-      input{
-        background: #212B36;
-        color: #FFF;
+      input {
+        background: #212b36;
+        color: #fff;
         border: 1px solid rgba(144, 202, 249, 0.5);
       }
-      span{
+      span {
         font-weight: bold;
       }
     }
   }
-  .rdrCalendarWrapper{
+  .rdrCalendarWrapper {
     background: transparent;
     .rdrDateDisplayWrapper {
       background-color: transparent;
 
       .rdrDateDisplayItem {
-        background-color: #212B36;
-        input{
+        background-color: #212b36;
+        input {
           font-weight: bold;
-          color: #FFF;
+          color: #fff;
         }
       }
     }
-    .rdrMonthAndYearWrapper{
+    .rdrMonthAndYearWrapper {
       .rdrNextPrevButton {
-        background: #212B36;
+        background: #212b36;
         border: 1px solid rgba(144, 202, 249, 0.5);
       }
       .rdrPprevButton i {
-        border-color: transparent #FFF transparent transparent;
+        border-color: transparent #fff transparent transparent;
       }
       .rdrNextButton i {
-        border-color: transparent transparent transparent #FFF;
+        border-color: transparent transparent transparent #fff;
       }
       .rdrMonthAndYearPickers {
-          .rdrMonthPicker {
-            position: relative;
-          }
-          .rdrYearPicker {
-            position: relative;
-          }
-          .rdrYearPicker:after{
-            content: "";
-            position: absolute;
-            top: 15px;
-            right: 5%;
-            border-width: 5px 5px 6px 5px;
-            border-color: #FFF transparent transparent transparent;
-            transform: translate(-3px, 0px);
-            width: 0;
-            height: 0;
-            padding: 0;
-            text-align: center;
-            border-style: solid;
-          }
-          .rdrMonthPicker:after{
-            content: "";
-            position: absolute;
-            top: 16px;
-            right: 6%;
-            border-width: 5px 5px 6px 5px;
-            border-color: #FFF transparent transparent transparent;
-            transform: translate(-3px, 0px);
-            width: 0;
-            height: 0;
-            padding: 0;
-            text-align: center;
-            border-style: solid;
-          }
-          select {
-            font-weight: bold;
-            color: #FFF;
-            background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) !important;
-          }
+        .rdrMonthPicker {
+          position: relative;
+        }
+        .rdrYearPicker {
+          position: relative;
+        }
+        .rdrYearPicker:after {
+          content: '';
+          position: absolute;
+          top: 15px;
+          right: 5%;
+          border-width: 5px 5px 6px 5px;
+          border-color: #fff transparent transparent transparent;
+          transform: translate(-3px, 0px);
+          width: 0;
+          height: 0;
+          padding: 0;
+          text-align: center;
+          border-style: solid;
+        }
+        .rdrMonthPicker:after {
+          content: '';
+          position: absolute;
+          top: 16px;
+          right: 6%;
+          border-width: 5px 5px 6px 5px;
+          border-color: #fff transparent transparent transparent;
+          transform: translate(-3px, 0px);
+          width: 0;
+          height: 0;
+          padding: 0;
+          text-align: center;
+          border-style: solid;
+        }
+        select {
+          font-weight: bold;
+          color: #fff;
+          background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) !important;
+        }
       }
     }
-    .rdrMonths{
-      .rdrMonth{
+    .rdrMonths {
+      .rdrMonth {
         width: 38.667em;
-        .rdrMonthName{
+        .rdrMonthName {
           font-weight: bold;
-          color: #FFF;
+          color: #fff;
           text-align: center;
-          background: #212B36;
+          background: #212b36;
         }
-        .rdrWeekDays{
-          .rdrMonthName{
+        .rdrWeekDays {
+          .rdrMonthName {
             font-weight: bold;
-            color: #FFF;
+            color: #fff;
           }
-          .rdrWeekDay{
+          .rdrWeekDay {
             font-weight: bold;
-            color: #FFF;
+            color: #fff;
           }
         }
-        .rdrDays{
+        .rdrDays {
           .rdrDayDisabled {
-            background-color: transparent
+            background-color: transparent;
           }
           .rdrDayNumber {
             font-weight: bold;
@@ -160,7 +162,7 @@ h1 {
             display: none;
           }
           .rdrDayNumber span {
-            color: #FFF;
+            color: #fff;
           }
         }
       }
@@ -169,15 +171,15 @@ h1 {
 }
 .tinh-custom-light {
   width: 100%;
-  .rdrDefinedRangesWrapper{
+  .rdrDefinedRangesWrapper {
     background: transparent !important;
     border-right: 1px solid rgba(144, 202, 249, 0.5);
-    .rdrStaticRanges{
+    .rdrStaticRanges {
       .rdrStaticRange .rdrStaticRangeLabel:hover {
-        background:rgba(144, 202, 249, 0.5)  !important;
+        background: rgba(144, 202, 249, 0.5) !important;
         transition: 0.7s;
       }
-      .rdrStaticRangeSelected{
+      .rdrStaticRangeSelected {
         color: #90caf9 !important;
       }
       .rdrStaticRange {
@@ -187,89 +189,89 @@ h1 {
       }
     }
     .rdrInputRanges .rdrInputRange {
-      input{
+      input {
         border: 1px solid rgba(144, 202, 249, 0.5);
       }
-      span{
+      span {
         font-weight: bold;
       }
     }
   }
-  .rdrCalendarWrapper{
+  .rdrCalendarWrapper {
     background: transparent;
     .rdrDateDisplayWrapper {
       background-color: transparent;
 
       .rdrDateDisplayItem {
-        input{
+        input {
           font-weight: bold;
         }
       }
     }
-    .rdrMonthAndYearWrapper{
+    .rdrMonthAndYearWrapper {
       .rdrNextPrevButton {
         border: 1px solid rgba(144, 202, 249, 0.5);
       }
-      
+
       .rdrMonthAndYearPickers {
-          .rdrMonthPicker {
-            position: relative;
-          }
-          .rdrYearPicker {
-            position: relative;
-          }
-          .rdrYearPicker:after{
-            content: "";
-            position: absolute;
-            top: 15px;
-            right: 5%;
-            border-width: 5px 5px 6px 5px;
-            border-color: #CCC transparent transparent transparent;
-            transform: translate(-3px, 0px);
-            width: 0;
-            height: 0;
-            padding: 0;
-            text-align: center;
-            border-style: solid;
-          }
-          .rdrMonthPicker:after{
-            content: "";
-            position: absolute;
-            top: 16px;
-            right: 6%;
-            border-width: 5px 5px 6px 5px;
-            border-color: #CCC transparent transparent transparent;
-            transform: translate(-3px, 0px);
-            width: 0;
-            height: 0;
-            padding: 0;
-            text-align: center;
-            border-style: solid;
-          }
-          select {
-            font-weight: bold;
-            background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) !important;
-          }
+        .rdrMonthPicker {
+          position: relative;
+        }
+        .rdrYearPicker {
+          position: relative;
+        }
+        .rdrYearPicker:after {
+          content: '';
+          position: absolute;
+          top: 15px;
+          right: 5%;
+          border-width: 5px 5px 6px 5px;
+          border-color: #ccc transparent transparent transparent;
+          transform: translate(-3px, 0px);
+          width: 0;
+          height: 0;
+          padding: 0;
+          text-align: center;
+          border-style: solid;
+        }
+        .rdrMonthPicker:after {
+          content: '';
+          position: absolute;
+          top: 16px;
+          right: 6%;
+          border-width: 5px 5px 6px 5px;
+          border-color: #ccc transparent transparent transparent;
+          transform: translate(-3px, 0px);
+          width: 0;
+          height: 0;
+          padding: 0;
+          text-align: center;
+          border-style: solid;
+        }
+        select {
+          font-weight: bold;
+          background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) !important;
+        }
       }
     }
-    .rdrMonths{
-      .rdrMonth{
+    .rdrMonths {
+      .rdrMonth {
         width: 38.667em;
-        .rdrMonthName{
+        .rdrMonthName {
           font-weight: bold;
           text-align: center;
         }
-        .rdrWeekDays{
-          .rdrMonthName{
+        .rdrWeekDays {
+          .rdrMonthName {
             font-weight: bold;
           }
-          .rdrWeekDay{
+          .rdrWeekDay {
             font-weight: bold;
           }
         }
-        .rdrDays{
+        .rdrDays {
           .rdrDayDisabled {
-            background-color: transparent
+            background-color: transparent;
           }
           .rdrDayNumber {
             font-weight: bold;
@@ -277,7 +279,6 @@ h1 {
           .rdrDayPassive .rdrDayNumber span {
             display: none;
           }
-          
         }
       }
     }
