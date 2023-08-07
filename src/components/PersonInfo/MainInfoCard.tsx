@@ -101,7 +101,7 @@ export default function MainInfoCard(props: IProps) {
 
       <CardContent>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <CardMedia
               sx={{ borderRadius: '.5rem' }}
               component="img"
@@ -110,7 +110,7 @@ export default function MainInfoCard(props: IProps) {
               alt="Avatar"
             />
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             <CustomizableList items={items} />
           </Grid>
         </Grid>
@@ -128,7 +128,7 @@ export default function MainInfoCard(props: IProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent style={{ textAlign: 'left' }}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Typography variant='button' component='h4'>Số định danh</Typography>
               <Typography paragraph>
                 {data.soDinhDanh}
@@ -159,7 +159,7 @@ export default function MainInfoCard(props: IProps) {
                 {data.thuongTru}
               </Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
 
               <Typography variant='button' component='h4'>Họ Tên</Typography>
               <Typography paragraph>
