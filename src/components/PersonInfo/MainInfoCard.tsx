@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import BadgeIcon from '@mui/icons-material/Badge';
+import CakeIcon from '@mui/icons-material/Cake';
+import CarRentalIcon from '@mui/icons-material/CarRental';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EmailIcon from '@mui/icons-material/Email';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import { CardActions, Card, CardContent, Grid, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
@@ -17,11 +24,11 @@ import { red } from '@mui/material/colors';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 
-
+import SampleAvatar from '@/assets/image/avatar.jpg';
 import { DataSearch } from '@/interfaces/personInfo';
-import { sampleData } from '@/pages/PersonInfo/PersonInfoAnonymous';
 
 import CustomizableList from './ListItem';
+
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -40,6 +47,10 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 interface IProps {
   dataRes: DataSearch
 }
+interface Items {
+  icon: string;
+  primaryText: string | string[];
+}
 export default function MainInfoCard(props: IProps) {
   const [expanded, setExpanded] = React.useState(true);
   const handleExpandClick = () => {
@@ -49,10 +60,17 @@ export default function MainInfoCard(props: IProps) {
   const [data, setData] = useState<DataSearch>(dataRes)
 
   const items = [
-    { icon: <HomeIcon />, primaryText: 'Xã Minh Quang, Huyện Vũ Thư, Tỉnh Thái Bình' },
-    { icon: <PhoneAndroidIcon />, primaryText: '0852134401' },
-    { icon: <EmailIcon />, primaryText: 'leeboykt@gmail.com' },
-    { icon: <FacebookIcon />, primaryText: 'https://www.facebook.com/nguyenkhanhthuan' },
+    { icon: <PermIdentityIcon />, primaryText: data.PII, type: 'pii' },
+    { icon: <BadgeIcon />, primaryText: data.FullName, type: 'fullname' },
+    { icon: <CakeIcon />, primaryText: data.Birthday, type: 'birthday' },
+    { icon: <HomeIcon />, primaryText: data.Address, type: 'address' },
+    { icon: <EmailIcon />, primaryText: data.Email, type: 'email' },
+    { icon: <PhoneAndroidIcon />, primaryText: data.PhoneNum, type: 'phonenum' },
+    { icon: <FacebookIcon />, primaryText: data.Facebook, type: 'facebook' },
+    { icon: <PersonPinIcon />, primaryText: data.Username, type: 'usename' },
+    { icon: <CarRentalIcon />, primaryText: data.Plate, type: 'plate' },
+    { icon: <AccountBalanceIcon />, primaryText: data.PII, type: 'tax' },
+    { icon: <AccountBalanceWalletIcon />, primaryText: data.PII, type: 'banknumber' },
   ];
 
   return (
@@ -64,7 +82,7 @@ export default function MainInfoCard(props: IProps) {
             <CardMedia
               component="img"
               height="50"
-              image="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+              image={SampleAvatar}
               alt="Avatar"
             />
           </Avatar>
@@ -72,12 +90,12 @@ export default function MainInfoCard(props: IProps) {
         action={
           <IconButton
             aria-label="copy-content"
-            onClick={() => { navigator.clipboard.writeText(`${data.hoTen.ho} ${data.hoTen.chuDem} ${data.hoTen.ten}`) }}
+            onClick={() => { navigator.clipboard.writeText(data.hoTen) }}
           >
             <ContentCopyIcon />
           </IconButton>
         }
-        title={`${data.hoTen.ho} ${data.hoTen.chuDem} ${data.hoTen.ten}`}
+        title={data.FullName[0]}
         subheader={data.soDinhDanh}
       />
 
@@ -88,7 +106,7 @@ export default function MainInfoCard(props: IProps) {
               sx={{ borderRadius: '.5rem' }}
               component="img"
               height="194"
-              image="https://wallpapershome.com/images/wallpapers/barbara-palvin-1440x2560-victorias-secret-angel-model-fashion-portrait-12712.jpg"
+              image="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg?w=2000"
               alt="Avatar"
             />
           </Grid>
@@ -128,14 +146,24 @@ export default function MainInfoCard(props: IProps) {
               <Typography variant='button' component='h4'>Sinh năm</Typography>
 
               <Typography paragraph>
-                {data.ngayThangNamSinh.nam}
+                {data.ngayThangNamSinh}
+              </Typography>
+              <Typography variant='button' component='h4'>Nơi đăng ký khai sinh</Typography>
+
+              <Typography paragraph>
+                {data.noiDangKyKhaiSinh}
+              </Typography>
+              <Typography variant='button' component='h4'>Địa chỉ thường trú</Typography>
+
+              <Typography paragraph>
+                {data.thuongTru}
               </Typography>
             </Grid>
             <Grid item xs={6}>
 
               <Typography variant='button' component='h4'>Họ Tên</Typography>
               <Typography paragraph>
-                {data.hoTen.ho} {data.hoTen.chuDem} {data.hoTen.ten}
+                {data.hoTen}
               </Typography>
               <Typography variant='button' component='h4'>Tôn giáo</Typography>
 
@@ -152,17 +180,21 @@ export default function MainInfoCard(props: IProps) {
               <Typography paragraph>
                 {data.nhomMau}
               </Typography>
+              <Typography variant='button' component='h4'>Quê quán</Typography>
 
+              <Typography paragraph>
+                {data.queQuan}
+              </Typography>
+              <Typography variant='button' component='h4'>Nơi ở hiện tại</Typography>
+
+              <Typography paragraph>
+                {data.noiOHienTai}
+              </Typography>
             </Grid>
           </Grid>
-
-
-
         </CardContent>
       </Collapse>
-
     </Card>
-
 
   );
 }

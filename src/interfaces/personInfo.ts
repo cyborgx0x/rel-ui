@@ -1,8 +1,5 @@
 export interface PersonInfoProps {
   hoVaTen: string;
-  quocTich: string | undefined;
-  soDinhDanh: string;
-  soCMND: string;
   type: string;
 }
 
@@ -17,6 +14,7 @@ export interface BasicGridProps {
 }
 
 export interface DataSearch {
+  media: string;
   PII: string[];
   FullName: string[];
   Birthday: string[];
@@ -32,34 +30,15 @@ export interface DataSearch {
   tinhTrangHonNhan: string;
   soDinhDanh: string;
   soCMND: string;
-  hoTen: HoTen;
+  hoTen: string;
   gioiTinh: number;
   danToc: string;
   tonGiao: string;
   nhomMau: string;
-  ngayThangNamSinh: DateOfBirth;
-  noiDangKyKhaiSinh: Address;
+  ngayThangNamSinh: string;
+  noiDangKyKhaiSinh: string;
   quocTich: string;
-  queQuan: Address;
-  thuongTru: Address;
-  noiOHienTai: Address;
-}
-
-export interface HoTen {
-  ho: string;
-  chuDem: string;
-  ten: string;
-}
-
-export interface DateOfBirth {
-  nam: number;
-  ngayThangNam: string;
-}
-
-export interface Address {
-  maTinhThanh: number;
-  maQuanHuyen: number;
-  maPhuongXa: number;
-  chiTiet: string;
-  quocGia: string;
+  queQuan: string;
+  thuongTru: string;
+  noiOHienTai: string;
 }

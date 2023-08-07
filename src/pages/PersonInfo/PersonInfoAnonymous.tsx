@@ -2,9 +2,12 @@
 
 */
 
+import Man_Avatar from '@/assets/image/man-avatar.jpg';
+
 export const sampleData = {
+    'media': Man_Avatar,
     'PII': [
-        '125287197',
+        '001001002002',
     ],
     'TaxID': [],
     'BankNumer': [],
@@ -16,11 +19,11 @@ export const sampleData = {
         '7/14/1988',
     ],
     'Address': [
-        'NH, MY HUONG, LUONG TAI, BAC NINH',
+        'Dinh Tien Hoang, Hoan Kiem, Ha Noi',
     ],
     'Email': [],
     'PhoneNum': [
-        '84388031610',
+        '84888444888',
     ],
     'Facebook': [],
     'Username': [],
@@ -32,64 +35,26 @@ export const sampleData = {
     'remaining': 'unlimited',
     'soDinhDanh': '034200003214',
     'soCMND': '',
-    'hoTen': {
-        'ho': '',
-        'chuDem': '',
-        'ten': 'PHẠM TRUNG LIN',
-    },
+    'hoTen': '  PH\u1ea0M TRUNG LIN',
     'gioiTinh': 1,
     'danToc': '01',
     'tonGiao': '00',
     'tinhTrangHonNhan': '1',
     'nhomMau': '00',
-    'ngayThangNamSinh': {
-        'nam': 2000,
-        'ngayThangNam': '20000709',
-    },
-    'noiDangKyKhaiSinh': {
-        'maTinhThanh': 34,
-        'maQuanHuyen': 344,
-        'maPhuongXa': 13234,
-        'chiTiet': '',
-        'quocGia': 'VN',
-    },
+    'ngayThangNamSinh': '2000-07-09',
+    'noiDangKyKhaiSinh': ', None, None, None, VN',
     'quocTich': 'VN',
-    'queQuan': {
-        'maTinhThanh': 34,
-        'maQuanHuyen': 344,
-        'maPhuongXa': 13234,
-        'chiTiet': '',
-        'quocGia': 'VN',
-    },
-    'thuongTru': {
-        'maTinhThanh': 34,
-        'maQuanHuyen': 344,
-        'maPhuongXa': 13234,
-        'chiTiet': 'THÔN TRỰC NHO',
-        'quocGia': 'VN',
-    },
-    'noiOHienTai': {
-        'maTinhThanh': 34,
-        'maQuanHuyen': 344,
-        'maPhuongXa': 13234,
-        'chiTiet': 'THÔN TRỰC NHO',
-        'quocGia': 'VN',
-    },
+    'queQuan': ', None, None, None, VN',
+    'thuongTru': 'TH\u00d4N TR\u1ef0C NHO, None, None, None, VN',
+    'noiOHienTai': 'TH\u00d4N TR\u1ef0C NHO, None, None, None, VN',
     'relatedPerson': [
         {
-            'hoVaTen': 'PHẠM VĂN NƠI',
-            'quocTich': 'VN',
-            'soDinhDanh': '034069018391',
-            'soCMND': '151282619',
+            'hoVaTen': 'PH\u1ea0M V\u0102N N\u01a0I',
             'type': 'cha',
         },
         {
-            'hoVaTen': 'PHẠM THỊ TƠ',
-            'quocTich': 'VN',
-            'soDinhDanh': '034175013724',
-            'soCMND': '151956852',
+            'hoVaTen': 'PH\u1ea0M TH\u1eca T\u01a0',
             'type': 'me',
         },
-
     ],
 }

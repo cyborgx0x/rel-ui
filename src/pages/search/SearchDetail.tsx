@@ -13,6 +13,7 @@ import useSearch from '@/Hooks/useSearch';
 import { DataSearch } from '@/interfaces/personInfo';
 
 import SearchPersonInfo from '../PersonInfo/PersonInfo';
+import { sampleData } from '../PersonInfo/PersonInfoAnonymous';
 
 
 const SearchDetail = () => {
@@ -149,8 +150,7 @@ const SearchDetail = () => {
         )}
       </Stack>
       {!_.isEmpty(data) && (
-        <Box boxShadow={10} borderRadius={2} width="100%" marginTop={4}>
-          <></>
+        <Box width="100%" marginTop={4}>
           {accessToken ? (
             <SearchPersonInfo dataRes={data} />
           ) : (
@@ -174,6 +174,7 @@ const SearchDetail = () => {
               >
                 Login to view full information
               </Button>
+              <SearchPersonInfo dataRes={sampleData} />
             </Box>
           )}
         </Box>
