@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 interface Item {
   icon: React.ReactNode;
   type: string;
-  primaryText: string | string[];
+  primaryText: string[];
 }
 function isKeyAnEmptyList(obj: { [key: string]: any }, keyToCheck: string): boolean {
   return Array.isArray(obj[keyToCheck]) && obj[keyToCheck].length === 0;
@@ -38,17 +38,13 @@ export default function CustomizableList({ items }: CustomizableListProps) {
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText>
-                    <Typography variant="body1" style={{ fontSize: '12pt' }}>
+                    {item.primaryText.map((text, index2) => (
+                      <React.Fragment key={index2}>
+                        {item.type === 'facebook' ? <Link variant="button" href={`https://www.facebook.com/${text}`}>Facebook</Link> : <Typography variant="body1" style={{ fontSize: '12pt' }}> {text} </Typography>}
+                        {index !== item.primaryText.length - 1}
+                      </React.Fragment>
+                    ))}
 
-                      {typeof item.primaryText === 'string'
-                        ? <p>{item.primaryText}</p>
-                        : item.primaryText.map((text, index2) => (
-                          <React.Fragment key={index2}>
-                            {item.type === 'facebook' ? <Link variant="button" href={`https://www.facebook.com/${text}`}>Facebook</Link> : <p>{text}</p>}
-                            {index !== item.primaryText.length - 1}
-                          </React.Fragment>
-                        ))}
-                    </Typography>
                     <hr />
                   </ListItemText>
                 </ListItemButton>}

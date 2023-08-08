@@ -54,7 +54,7 @@ const SearchDetail = () => {
       valueSearchConvert = `84${partAfterValue}`;
     }
     const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearchConvert}`)) as DataSearch;
-
+    console.log(dataRes)
     setData(dataRes);
     setRemainToken(dataRes.remaining);
     setShow(true);

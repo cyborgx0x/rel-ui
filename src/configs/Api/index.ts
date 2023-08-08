@@ -5,7 +5,7 @@ import PATH from '../Enums/api';
 // const AUTH_PREFIX = 'api/v1/auth';
 const META_PREFIX = 'api/v1';
 
-const HOST = 'http://localhost:8000';
+const HOST = process.env.REACT_APP_URL;
 
 const getBaseUrl = (prefix: any) => {
   return `${HOST}/${prefix}`;

@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 export interface PersonInfoProps {
   hoVaTen: string;
   type: string;
@@ -6,7 +8,8 @@ export interface PersonInfoProps {
 export interface GridItems {
   xs: number;
   md: number;
-  content: any;
+  content: ReactElement;
+  id: string;
 }
 
 export interface BasicGridProps {

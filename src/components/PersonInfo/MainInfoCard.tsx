@@ -52,13 +52,32 @@ interface Items {
   primaryText: string | string[];
 }
 export default function MainInfoCard(props: IProps) {
-  const [expanded, setExpanded] = React.useState(true);
+  interface Map {
+    [key: string]: string | undefined
+  }
+  const ReligionList:Map = {
+    '00': 'Không',
+    '01': 'Phật giáo',
+    '02': 'Công giáo',
+    '03': 'Tin lành',
+    '04': 'Cao Đài',
+    '05': 'Phật giáo Hòa Hảo',
+    '06': 'Tôn giáo Baha’i',
+    '07': 'Tịnh độ Cư sỹ Phật hội Việt Nam',
+    '08': 'Đạo Tứ Ân Hiếu nghĩa',
+    '09': 'Giáo hội Phật đường Nam Tông Minh Sư đạo',
+    '10': 'Hội thánh Minh lý đạo - Tam Tông Miếu',
+    '11': 'Chăm Bà la môn',
+    '12': 'Giáo hội Các thành hữu Ngày sau của Chúa Giê su Ky tô (Mormon)',
+    '13': 'Phật giáo Hiếu Nghĩa Tà Lơn',
+    '14': 'Giáo hội Cơ đốc Phục lâm Việt Nam',
+  }
+  const { dataRes } = props
+  const data = dataRes
+  const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const { dataRes } = props
-  const [data, setData] = useState<DataSearch>(dataRes)
-
   const items = [
     { icon: <PermIdentityIcon />, primaryText: data.PII, type: 'pii' },
     { icon: <BadgeIcon />, primaryText: data.FullName, type: 'fullname' },
@@ -141,7 +160,7 @@ export default function MainInfoCard(props: IProps) {
               <Typography variant='button' component='h4'>Dân tộc</Typography>
 
               <Typography paragraph>
-                {data.danToc ? 'Kinh' : 'Nữ'}
+                {data.danToc}
               </Typography>
               <Typography variant='button' component='h4'>Sinh năm</Typography>
 
@@ -168,7 +187,7 @@ export default function MainInfoCard(props: IProps) {
               <Typography variant='button' component='h4'>Tôn giáo</Typography>
 
               <Typography paragraph>
-                {data.tonGiao ? 'Không' : 'Nữ'}
+                {ReligionList[data.tonGiao]}
               </Typography>
               <Typography variant='button' component='h4'>Tình trạng hôn nhân</Typography>
 

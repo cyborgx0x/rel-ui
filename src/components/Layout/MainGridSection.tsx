@@ -25,7 +25,7 @@ const BasicGrid: React.FC<BasicGridProps> = ({ gridItems }) => {
 
     <Grid container spacing={2} mt={0.5}>
       {gridItems.map((item, index) => (
-        <Grid key={index} item xs={item.xs} md={item.md}>
+        <Grid key={item.id} item xs={item.xs} md={item.md}>
           <Item>
             {item.content}
           </Item>

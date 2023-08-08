@@ -53,7 +53,7 @@ const PersonInfoCard: React.FC<PersonInfoProps> = ({
             <ContentCopyIcon />
           </IconButton>
         }
-        title={type === 'cha' ? 'Cha' : 'Mẹ'}
+        title={type}
       />
       <CardContent>
         <Typography variant='button' component='h4'>Số định danh: *********</Typography>

@@ -96,7 +96,7 @@ export const Header = ({ toggleNavigation }: HeaderProps) => {
               Search
             </Button>
             <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
-              Product
+              Massive Investigation
             </Button>
             <Button variant="text" style={{ color: 'black', textTransform: 'none' }}>
               Blog
