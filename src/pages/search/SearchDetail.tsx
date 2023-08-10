@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import icNotFound from '@/assets/image/ic_not_found.png';
 import ItemRow from '@/components/common/ItemRow';
+import useNotify from '@/Hooks/common/useNotify';
 import useShowModalLoginGmail from '@/Hooks/common/useShowModalLoginGmail';
 import useSearch from '@/Hooks/useSearch';
 import { DataSearch } from '@/interfaces/personInfo';
@@ -17,6 +18,7 @@ import { sampleData } from '../PersonInfo/PersonInfoAnonymous';
 
 
 const SearchDetail = () => {
+  const { onNotify } = useNotify();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const handleRemainToken = async () => {
     const remainToken = await getRemainToken();
@@ -48,16 +50,21 @@ const SearchDetail = () => {
     setTypeSearch(event.target.value as string);
   };
   const handleSearch = async () => {
-    let valueSearchConvert = valueSearch;
-    if (typeSearch === 'phone:' && valueSearch.split('')[0] === '0') {
-      const partAfterValue = valueSearch.slice(1, valueSearch.length);
-      valueSearchConvert = `84${partAfterValue}`;
+    if (!accessToken) {
+      setData(sampleData)
+      onNotify('info', 'Hiển thị thông tin mẫu, vui lòng đăng nhập để xem chi tiết');
+    } else {
+
+      let valueSearchConvert = valueSearch;
+      if (typeSearch === 'phone:' && valueSearch.split('')[0] === '0') {
+        const partAfterValue = valueSearch.slice(1, valueSearch.length);
+        valueSearchConvert = `84${partAfterValue}`;
+      }
+      const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearchConvert}`)) as DataSearch;
+      setData(dataRes);
+      setRemainToken(dataRes.remaining);
+      setShow(true);
     }
-    const dataRes = (await handleSearchInfo(`${typeSearch}${valueSearchConvert}`)) as DataSearch;
-    console.log(dataRes)
-    setData(dataRes);
-    setRemainToken(dataRes.remaining);
-    setShow(true);
   };
 
   return (

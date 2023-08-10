@@ -10,9 +10,11 @@ export const sampleData = {
         '001001002002',
     ],
     'TaxID': [],
-    'BankNumer': [],
+    'BankNumer': [
+        '999999999',
+    ],
     'FullName': [
-        'PHAM THI THUY',
+        'PH\u1ea0M TRUNG LIN',
     ],
     'Birthday': [
         '1988-07-14',
@@ -21,7 +23,9 @@ export const sampleData = {
     'Address': [
         'Dinh Tien Hoang, Hoan Kiem, Ha Noi',
     ],
-    'Email': [],
+    'Email': [
+        'example@gmail.com',
+    ],
     'PhoneNum': [
         '84888444888',
     ],
@@ -42,15 +46,16 @@ export const sampleData = {
     'tinhTrangHonNhan': '1',
     'nhomMau': '00',
     'ngayThangNamSinh': '2000-07-09',
-    'noiDangKyKhaiSinh': ', None, None, None, VN',
+    'noiDangKyKhaiSinh': 'Dinh Tien Hoang, Hoan Kiem, Ha Noi',
     'quocTich': 'VN',
-    'queQuan': ', None, None, None, VN',
-    'thuongTru': 'TH\u00d4N TR\u1ef0C NHO, None, None, None, VN',
-    'noiOHienTai': 'TH\u00d4N TR\u1ef0C NHO, None, None, None, VN',
+    'queQuan': 'Dinh Tien Hoang, Hoan Kiem, Ha Noi',
+    'thuongTru': 'Dinh Tien Hoang, Hoan Kiem, Ha Noi',
+    'noiOHienTai': 'Dinh Tien Hoang, Hoan Kiem, Ha Noi',
     'relatedPerson': [
         {
             'hoVaTen': 'PH\u1ea0M V\u0102N N\u01a0I',
             'type': 'cha',
+            'soDinhDanh': '034000000',
         },
         {
             'hoVaTen': 'PH\u1ea0M TH\u1eca T\u01a0',

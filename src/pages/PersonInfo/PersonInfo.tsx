@@ -41,6 +41,9 @@ const SearchPersonInfo = (props: IProps) => {
           <PersonInfoCard
             hoVaTen={item.hoVaTen}
             type={item.type}
+            soCMND={item.soCMND}
+            quocTich={item.quocTich}
+            soDinhDanh={item.soDinhDanh}
             key={item.hoVaTen}
           />
         </React.Fragment>

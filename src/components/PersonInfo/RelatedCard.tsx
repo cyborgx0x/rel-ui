@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import { red } from '@mui/material/colors';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
 
 import SampleAvatar from '@/assets/image/avatar.jpg';
@@ -25,10 +25,17 @@ const useStyles = makeStyles({
 
 const PersonInfoCard: React.FC<PersonInfoProps> = ({
   hoVaTen,
+  soCMND,
+  soDinhDanh,
   type,
 }) => {
   const classes = useStyles();
-
+  const formatData = (title: string, nodeData: (string | undefined)) => {
+    if (nodeData === undefined) {
+      return <></>
+    }
+    return <Typography variant='button' component='h4'>{title}: {nodeData}</Typography>
+  }
   return (
     <Card className={classes.card} sx={{ border: '1px solid rgba(0, 0, 0, 0.2)', mb: '10px' }}>
       <CardHeader
@@ -56,7 +63,8 @@ const PersonInfoCard: React.FC<PersonInfoProps> = ({
         title={type}
       />
       <CardContent>
-        <Typography variant='button' component='h4'>Số định danh: *********</Typography>
+        {formatData('Số Định Danh', soDinhDanh)}
+        {formatData('Số Chứng minh nhân dân', soCMND)}
       </CardContent>
     </Card>
   );

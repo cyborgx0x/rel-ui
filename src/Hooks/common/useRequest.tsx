@@ -6,11 +6,14 @@ import { useUser } from '@/contexts/User';
 
 import useInforGmail from './useInforGmail';
 import useLoading from './useLoading';
+import useNotify from './useNotify';
 import useShowModal from './useShowModal';
 
 const TIME_OUT = 150000;
 
 const useRequest = () => {
+  const { onNotify } = useNotify();
+
   const axiosMethod = axios;
   axiosMethod.defaults.timeout = TIME_OUT;
   // const { updateUserToken } = useUser();
@@ -38,16 +41,16 @@ const useRequest = () => {
   const handleError = (err: any, reject: any) => {
     setLoading(false);
     if (err?.message?.includes?.('401')) {
-      setShowModal({ isShow: true, content: 'End of login session' });
+      onNotify('error', 'Hết phiên đăng nhập, vui lòng đăng nhập lại')
       logout();
     } else if (err?.message === 'Network Error') {
-      setShowModal({ isShow: true, content: err?.message });
+      onNotify('error', err?.message)
     } else if (err?.message?.includes?.('403')) {
-      setShowModal({ isShow: true, content: 'You do not have access' });
+      onNotify('error', 'Vui lòng thử lại')
     } else if (err?.message?.includes('timeout')) {
-      setShowModal({ isShow: true, content: err?.message });
+      onNotify('error', err?.message)
     } else if (err?.message?.includes('500') || err?.message?.includes('502') || err?.message?.includes('503')) {
-      setShowModal({ isShow: true, content: 'Server error' });
+      onNotify('error', err?.message)
     } else {
       setShowModal({ isShow: true, content: err?.message });
     }

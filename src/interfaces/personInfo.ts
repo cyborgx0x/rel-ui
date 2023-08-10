@@ -3,6 +3,9 @@ import { ReactElement } from 'react';
 export interface PersonInfoProps {
   hoVaTen: string;
   type: string;
+  quocTich: string | undefined;
+  soDinhDanh: string | undefined;
+  soCMND: string | undefined;
 }
 
 export interface GridItems {

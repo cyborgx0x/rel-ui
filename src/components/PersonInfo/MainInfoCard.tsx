@@ -55,7 +55,7 @@ export default function MainInfoCard(props: IProps) {
   interface Map {
     [key: string]: string | undefined
   }
-  const ReligionList:Map = {
+  const ReligionList: Map = {
     '00': 'Không',
     '01': 'Phật giáo',
     '02': 'Công giáo',
@@ -71,6 +71,73 @@ export default function MainInfoCard(props: IProps) {
     '12': 'Giáo hội Các thành hữu Ngày sau của Chúa Giê su Ky tô (Mormon)',
     '13': 'Phật giáo Hiếu Nghĩa Tà Lơn',
     '14': 'Giáo hội Cơ đốc Phục lâm Việt Nam',
+  }
+  const ethnic: Map = {
+    '01': 'Kinh',
+    '02': 'Tày',
+    '03': 'Thái',
+    '04': 'Hoa',
+    '05': 'Khơ-me',
+    '06': 'Mường',
+    '07': 'Nùng',
+    '08': 'HMông',
+    '09': 'Dao',
+    '10': 'Gia-rai',
+    '11': 'Ngái',
+    '12': 'Ê-đê',
+    '13': 'Ba na',
+    '14': 'Xơ-Đăng',
+    '15': 'Sán Chay',
+    '16': 'Cơ-ho',
+    '17': 'Chăm',
+    '18': 'Sán Dìu',
+    '19': 'Hrê',
+    '20': 'Mnông',
+    '21': 'Ra-glai',
+    '22': 'Xtiêng',
+    '23': 'Bru-Vân Kiều',
+    '24': 'Thổ',
+    '25': 'Giáy',
+    '26': 'Cơ-tu',
+    '27': 'Gié Triêng',
+    '28': 'Mạ',
+    '29': 'Khơ-mú',
+    '30': 'Co',
+    '31': 'Tà-ôi',
+    '32': 'Chơ-ro',
+    '33': 'Kháng',
+    '34': 'Xinh-mun',
+    '35': 'Hà Nhì',
+    '36': 'Chu ru',
+    '37': 'Lào',
+    '38': 'La Chí',
+    '39': 'La Ha',
+    '40': 'Phù Lá',
+    '41': 'La Hủ',
+    '42': 'Lự',
+    '43': 'Lô Lô',
+    '44': 'Chứt',
+    '45': 'Mảng',
+    '46': 'Pà Thẻn',
+    '47': 'Co Lao',
+    '48': 'Cống',
+    '49': 'Bố Y',
+    '50': 'Si La',
+    '51': 'Pu Péo',
+    '52': 'Brâu',
+    '53': 'Ơ Đu',
+    '54': 'Rơ măm',
+    '55': 'Người nước ngoài',
+    '56': 'Không rõ',
+  }
+  const bloodType: Map = {
+    '00': 'Chưa có thông tin',
+    '01': 'Nhóm máu B',
+    '02': 'Nhóm máu A',
+    '03': 'Nhóm máu B',
+    '04': 'Nhóm máu A',
+    '05': 'Nhóm máu AB',
+    '06': 'Nhóm máu O',
   }
   const { dataRes } = props
   const data = dataRes
@@ -92,6 +159,40 @@ export default function MainInfoCard(props: IProps) {
     { icon: <AccountBalanceWalletIcon />, primaryText: data.PII, type: 'banknumber' },
   ];
 
+  const formatGender = (gender: number) => {
+    if (gender === 1) {
+      return 'Nam'
+    }
+    if (gender === 0) {
+      return 'Nữ'
+    }
+    return ''
+  }
+  const formatMarryStatus = (marryStatus: string) => {
+    if (marryStatus === '1') {
+      return 'Chưa kết hôn'
+    }
+    if (marryStatus === '2') {
+      return 'Đã kết hôn'
+    }
+    return ''
+  }
+  const rightColumn = [
+    { title: 'Số định danh', nodeData: data.soDinhDanh },
+    { title: 'Giới Tính', nodeData: formatGender(data.gioiTinh) },
+    { title: 'Dân Tộc', nodeData: ethnic[data.danToc] },
+    { title: 'Ngày Tháng Năm Sinh', nodeData: data.ngayThangNamSinh },
+    { title: 'Nơi Đăng Ký Khai Sinh', nodeData: data.noiDangKyKhaiSinh },
+    { title: 'Thường Trú', nodeData: data.thuongTru },
+  ]
+  const leftColumn = [
+    { title: 'Họ Tên', nodeData: data.hoTen },
+    { title: 'Tôn Giáo', nodeData: ReligionList[data.tonGiao] },
+    { title: 'Tình Trạng Hôn Nhân', nodeData: formatMarryStatus(data.tinhTrangHonNhan) },
+    { title: 'Nhóm Máu', nodeData: bloodType[data.nhomMau] },
+    { title: 'Quê Quán', nodeData: data.queQuan },
+    { title: 'Nơi Ở Hiện Tại', nodeData: data.noiOHienTai },
+  ]
   return (
 
     <Card sx={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}>
@@ -148,67 +249,28 @@ export default function MainInfoCard(props: IProps) {
         <CardContent style={{ textAlign: 'left' }}>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Typography variant='button' component='h4'>Số định danh</Typography>
-              <Typography paragraph>
-                {data.soDinhDanh}
-              </Typography>
-              <Typography variant='button' component='h4'>Giới tính</Typography>
-
-              <Typography paragraph>
-                {data.gioiTinh ? 'Nam' : 'Nữ'}
-              </Typography>
-              <Typography variant='button' component='h4'>Dân tộc</Typography>
-
-              <Typography paragraph>
-                {data.danToc}
-              </Typography>
-              <Typography variant='button' component='h4'>Sinh năm</Typography>
-
-              <Typography paragraph>
-                {data.ngayThangNamSinh}
-              </Typography>
-              <Typography variant='button' component='h4'>Nơi đăng ký khai sinh</Typography>
-
-              <Typography paragraph>
-                {data.noiDangKyKhaiSinh}
-              </Typography>
-              <Typography variant='button' component='h4'>Địa chỉ thường trú</Typography>
-
-              <Typography paragraph>
-                {data.thuongTru}
-              </Typography>
+              {
+                rightColumn.map(({ title, nodeData }) => (
+                  <React.Fragment key={title}>
+                    <Typography variant='button' component='h4'>{title}</Typography>
+                    <Typography paragraph>
+                      {nodeData}
+                    </Typography>
+                  </React.Fragment>
+                ))
+              }
             </Grid>
             <Grid item xs={12} md={6}>
-
-              <Typography variant='button' component='h4'>Họ Tên</Typography>
-              <Typography paragraph>
-                {data.hoTen}
-              </Typography>
-              <Typography variant='button' component='h4'>Tôn giáo</Typography>
-
-              <Typography paragraph>
-                {ReligionList[data.tonGiao]}
-              </Typography>
-              <Typography variant='button' component='h4'>Tình trạng hôn nhân</Typography>
-
-              <Typography paragraph>
-                {data.tinhTrangHonNhan ? 'Đã kết hôn' : 'Chưa kết hôn'}
-              </Typography>
-              <Typography variant='button' component='h4'>Nhóm máu</Typography>
-
-              <Typography paragraph>
-                {data.nhomMau}
-              </Typography>
-              <Typography variant='button' component='h4'>Quê quán</Typography>
-
-              <Typography paragraph>
-                {data.queQuan}
-              </Typography>
-              <Typography variant='button' component='h4'>Nơi ở hiện tại</Typography>
-
-              <Typography paragraph>
-                {data.noiOHienTai}
-              </Typography>
+              {
+                leftColumn.map(({ title, nodeData }) => (
+                  <React.Fragment key={title}>
+                    <Typography variant='button' component='h4'>{title}</Typography>
+                    <Typography paragraph>
+                      {nodeData}
+                    </Typography>
+                  </React.Fragment>
+                ))
+              }
             </Grid>
           </Grid>
         </CardContent>
