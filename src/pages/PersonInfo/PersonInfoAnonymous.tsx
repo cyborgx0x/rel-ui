@@ -56,10 +56,15 @@ export const sampleData = {
             'hoVaTen': 'PH\u1ea0M V\u0102N N\u01a0I',
             'type': 'cha',
             'soDinhDanh': '034000000',
+            'soCMND': '034000000',
+            'quocTich': '034000000',
         },
         {
             'hoVaTen': 'PH\u1ea0M TH\u1eca T\u01a0',
             'type': 'me',
+            'soDinhDanh': '034000000',
+            'soCMND': '034000000',
+            'quocTich': '034000000',
         },
     ],
 }
