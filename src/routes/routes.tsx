@@ -21,7 +21,7 @@ const ListRouter = () => {
           render={(props) => (
             <GuestGuard>
               <Layout>
-                <SearchName />
+                <SearchDetail />
               </Layout>
             </GuestGuard>
           )}
