@@ -1,5 +1,5 @@
 // APP TEXT
-export const APP_TITLE = 'Wibu';
+export const APP_TITLE = 'ReconSentinel Engine';
 export const APP_DESCRIPTION = 'React TypeScript Material-UI boilerplate by Welcome, Developer.';
 export const FOOTER_TEXT = `${new Date().getFullYear()} ETC Technology Systems JSC`;
 // PAGES TITLE

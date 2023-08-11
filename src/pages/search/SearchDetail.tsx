@@ -96,7 +96,7 @@ const SearchDetail = () => {
               fontSize: isMobile ? 40 : 80,
             }}
           >
-            WIBU
+            ReconSentinel Engine
           </Typography>
         )}
 
